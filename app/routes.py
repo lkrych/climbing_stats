@@ -1,8 +1,7 @@
-from flask import request
+from flask import request, jsonify
 
 from app import app_instance
-from app.models.user import User
-from app.models.workout import Workout
+from app.models import helpers
 
 @app_instance.route('/')
 def hello_world():
@@ -17,20 +16,20 @@ def hello_world():
 
 @app_instance.route('/users', methods=['POST'])
 def create_user():
-    user = User.create_user(request.data)
-    return user
+    user = helpers.create_user(request.get_json())
+    return user.to_json()
 
 @app_instance.route('/user/<id>')
-def get_user():
-    user = User.get_user(id)
-    return user
+def get_user(id):
+    user = helpers.get_user(id)
+    return user.to_json()
 
 @app_instance.route('/workouts', methods=['POST'])
 def create_workout():
-    workout = Workout.create_workout(request.data)
+    workout = helpers.create_workout(request.get_json())
     return workout
 
 @app_instance.route('/workout/<id>')
 def get_workout():
-    workout = Workout.get_workout(id)
+    workout = helpers.get_workout(id)
     return workout
