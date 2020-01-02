@@ -8,6 +8,9 @@ class Users(db.Model):
     password_hash = db.Column(db.String(128))
     signup_date = db.Column(db.String(128), default=datetime.timestamp(datetime.now()))
 
+    workouts = db.relationship('Workouts', back_populates="user")
+    climbs = db.relationship('Climbs', back_populates='user')
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
     

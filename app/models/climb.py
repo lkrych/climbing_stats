@@ -8,5 +8,10 @@ class Climbs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'))
 
+    user = db.relationship('Users', back_populates="climbs")
+    workout = db.relationship('Workouts', back_populates="climbs")
+
+
+
     def __repr__(self):
         return '<Workout {}>'.format(self.id)
