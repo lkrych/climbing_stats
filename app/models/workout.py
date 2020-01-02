@@ -16,6 +16,6 @@ class Workouts(db.Model):
         return {
             "id": self.id,
             "date": datetime.fromtimestamp(float(self.date)),
-            "user_id": self.user_id,
-            "workouts": self.workouts
+            "user": self.user.to_json(),
+            "climbs": [c.to_json() for c in self.climbs]
         }
