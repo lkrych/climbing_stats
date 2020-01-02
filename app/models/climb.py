@@ -11,7 +11,21 @@ class Climbs(db.Model):
     user = db.relationship('Users', back_populates="climbs")
     workout = db.relationship('Workouts', back_populates="climbs")
 
-
-
     def __repr__(self):
         return '<Workout {}>'.format(self.id)
+    
+    def type_of_climb(self, type):
+        if type == 0:
+            return "boulder"
+        else:
+            return "route"
+    
+    def to_json(self):
+        return {
+            "id": self.id,
+            "type": self.type_of_climb(self.type),
+            "grade": self.grade,
+            "letter_grade": self.letter_grade,
+            "user": self.user_id,
+            "workout": self.workout_id
+        }
