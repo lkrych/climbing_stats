@@ -19,17 +19,32 @@ def create_user():
     user = helpers.create_user(request.get_json())
     return user.to_json()
 
-@app_instance.route('/user/<id>')
-def get_user(id):
-    user = helpers.get_user(id)
+@app_instance.route('/user/<user_id>')
+def get_user(user_id):
+    user = helpers.get_user(user_id)
     return user.to_json()
 
-@app_instance.route('/workouts', methods=['POST'])
-def create_workout():
-    workout = helpers.create_workout(request.get_json())
-    return workout
+@app_instance.route('/user/<user_id>/workouts', methods=['POST'])
+def create_workout(user_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            workout = helpers.create_workout(user_id, request.get_json())
+            return workout
+        except AssertionError as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
 
-@app_instance.route('/workout/<id>')
-def get_workout():
-    workout = helpers.get_workout(id)
-    return workout
+
+@app_instance.route('/user/<user_id>/workout/<workout_id>')
+def get_workout(user_id, workout_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        workout = helpers.get_workout(id)
+        return workout
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
