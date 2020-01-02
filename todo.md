@@ -4,7 +4,7 @@ Todo list
     1. [x] User
     2. [x] Workout
     3. [] Climb
-* [] Return climbs with workout
+* [x] Return climbs with workout
 * [] Add Update Endpoints
     1. [] User
     2. [] Workout
