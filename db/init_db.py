@@ -34,7 +34,7 @@ def load_table_sql(filename):
     :return: sql as string
     """
     sql = ""
-    with open('./tables/' + filename, 'r') as file:
+    with open('./migrations/' + filename, 'r') as file:
         sql = file.read()
     return sql
     
