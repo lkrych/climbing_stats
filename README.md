@@ -22,6 +22,18 @@ source climbing_stats_venv/bin/activate
 pip install -r requirements.txt
 ```
 
+# /users read
+
+```bash
+    curl localhost:5000/user/1
+```
+
+# /users create
+
+```bash
+curl -d '{"username":"blah", "email":"blahblah@blah.com", "password":"blahblah"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users
+```
+
 # /workout create
 
 
