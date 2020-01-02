@@ -1,8 +1,5 @@
-DATABASE_URL := sqlite:///db/climbing_stats.db
-
-start:
+start_dev:
 	FLASK_APP=app/climbing_stats.py \
-	DATABASE_URL=$(DATABASE_URL) \
 	python -m flask run
 
 create_db:
