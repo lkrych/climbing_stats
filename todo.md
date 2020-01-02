@@ -1,6 +1,6 @@
 Todo list
 
-* [x] write model methods
+* [] Read/Create Endpoints
     1. [x] User
-    2. [ ] Workout
-* [ ] test model methods
+    2. [] Workout
+* Return climbs with workout
