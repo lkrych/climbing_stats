@@ -43,7 +43,7 @@ def create_workout(user_id):
 def get_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
-        workout = helpers.get_workout(id)
+        workout = helpers.get_workout(workout_id)
         return workout.to_json()
     else:
         helpers.user_dne_exception()
