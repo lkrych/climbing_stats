@@ -4,11 +4,11 @@ from app.models.workout import Workouts
 from app.models.climb import Climbs
 
 ### USER HELPER METHODS ###########
-def get_user(id):
-    return db.session.query(Users).get(id)
+def get_user(user_id):
+    return db.session.query(Users).get(user_id)
 
-def check_if_user_exists(id):
-    if get_user(id):
+def check_if_user_exists(user_id):
+    if get_user(user_id):
         return True
     else:
         return False
@@ -45,8 +45,8 @@ def grade_and_letter(g):
     letter = g[2:]
     return grade, letter
 
-def get_workout():
-    return db.session.query(Workouts).get(id)
+def get_workout(workout_id):
+    return db.session.query(Workouts).get(workout_id)
 
 def create_workout(user_id, req_json):
     new_workout = Workouts(
@@ -68,7 +68,7 @@ def create_workout(user_id, req_json):
             check_valid_grade(1, r)
             grade, letter = grade_and_letter(r)
             new_r = Climbs(
-                type = 0,
+                type = 1,
                 grade = grade,
                 letter_grade = letter,
                 user_id = user_id,
