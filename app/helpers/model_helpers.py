@@ -1,4 +1,4 @@
-from app import db, bcrypt
+from app.helpers.factory_helpers import db, bcrypt
 from app.models.user import Users
 from app.models.workout import Workouts
 from app.models.climb import Climbs
@@ -13,8 +13,12 @@ def get_user(user_id):
         raise Exception("User: {} doesn't exist".format(user_id))
 
 def get_user_by_username(username):
-    user = db.session.query(Users).filter(username == username).one()
-    return user
+    try:
+        user = db.session.query(Users).filter(Users.username == username).one()
+        return user
+    except Exception as e:
+        print(e)
+        return None
 
 def check_if_user_exists(user_id):
     if get_user(user_id):

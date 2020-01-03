@@ -1,4 +1,4 @@
-from app import db
+from app.helpers.factory_helpers import db
 
 class Climbs(db.Model):
     id = db.Column(db.Integer, primary_key=True)
