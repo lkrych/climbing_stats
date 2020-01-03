@@ -1,18 +1,18 @@
 Todo list
 
-* [ ] Read/Create Endpoints
+* [x] Read/Create Endpoints
     1. [x] User
     2. [x] Workout
-    3. [ ] Climb
+    3. [x] Climb
 * [x] Return climbs with workout
-* [ ] Add Update Endpoints
+* [x] Add Update Endpoints
     1. [x] User
     2. [x] Workout
-    3. [ ] Climb
-* [ ] Add Delete Endpoints
+    3. [x] Climb
+* [x] Add Delete Endpoints
     1. [x] User
     2. [x] Workout
-    3. [ ] Climb
+    3. [x] Climb
 
 * [ ] Testing
 * [ ] Authentication of certain routes
