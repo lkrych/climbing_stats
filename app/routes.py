@@ -1,8 +1,8 @@
-from flask import request, jsonify
+from flask import request, jsonify, Blueprint
 from flask_jwt import jwt_required
 
-from app import app_instance
 from app.helpers import model_helpers as helpers
+route_blueprint = Blueprint('route_blueprint', __name__)
 
 ### INVISIBLE ROUTES #############
 # /auth
@@ -11,24 +11,24 @@ from app.helpers import model_helpers as helpers
 
 ### USER ROUTES ###########
 
-@app_instance.route('/users', methods=['POST'])
+@route_blueprint.route('/users', methods=['POST'])
 def create_user():
     user = helpers.create_user(request.get_json())
     return user.to_json()
 
-@app_instance.route('/user/<user_id>')
+@route_blueprint.route('/user/<user_id>')
 @jwt_required()
 def get_user(user_id):
     user = helpers.get_user(user_id)
     return user.to_json()
 
-@app_instance.route('/user/<user_id>', methods=['PUT', 'PATCH'])
+@route_blueprint.route('/user/<user_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_user(user_id):
     user = helpers.update_user(user_id, request.get_json())
     return user.to_json()
 
-@app_instance.route('/user/<user_id>', methods=['DELETE'])
+@route_blueprint.route('/user/<user_id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(user_id):
     user = helpers.delete_user(user_id)
@@ -36,7 +36,7 @@ def delete_user(user_id):
 
 ### WORKOUT ROUTES ###########
 
-@app_instance.route('/user/<user_id>/workouts', methods=['POST'])
+@route_blueprint.route('/user/<user_id>/workouts', methods=['POST'])
 @jwt_required()
 def create_workout(user_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -52,7 +52,7 @@ def create_workout(user_id):
         return jsonify(), 400
 
 
-@app_instance.route('/user/<user_id>/workout/<workout_id>')
+@route_blueprint.route('/user/<user_id>/workout/<workout_id>')
 @jwt_required()
 def get_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -67,7 +67,7 @@ def get_workout(user_id, workout_id):
         helpers.user_dne_exception()
         return jsonify(), 400
 
-@app_instance.route('/user/<user_id>/workout/<workout_id>', methods=['PUT', 'PATCH'])
+@route_blueprint.route('/user/<user_id>/workout/<workout_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -82,7 +82,7 @@ def update_workout(user_id, workout_id):
         helpers.user_dne_exception()
         return jsonify(), 400
 
-@app_instance.route('/user/<user_id>/workout/<workout_id>', methods=['DELETE'])
+@route_blueprint.route('/user/<user_id>/workout/<workout_id>', methods=['DELETE'])
 @jwt_required()
 def delete_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -99,7 +99,7 @@ def delete_workout(user_id, workout_id):
 
 ### CLIMBS ROUTES ###########
 
-@app_instance.route('/user/<user_id>/climbs', methods=['POST'])
+@route_blueprint.route('/user/<user_id>/climbs', methods=['POST'])
 @jwt_required()
 def create_climb(user_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -114,7 +114,7 @@ def create_climb(user_id):
         helpers.user_dne_exception()
         return jsonify(), 400
 
-@app_instance.route('/user/<user_id>/climb/<climb_id>')
+@route_blueprint.route('/user/<user_id>/climb/<climb_id>')
 @jwt_required()
 def get_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -129,7 +129,7 @@ def get_climb(user_id, climb_id):
         helpers.user_dne_exception()
         return jsonify(), 400
 
-@app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['PUT', 'PATCH'])
+@route_blueprint.route('/user/<user_id>/climb/<climb_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
@@ -144,7 +144,7 @@ def update_climb(user_id, climb_id):
         helpers.user_dne_exception()
         return jsonify(), 400
 
-@app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['DELETE'])
+@route_blueprint.route('/user/<user_id>/climb/<climb_id>', methods=['DELETE'])
 @jwt_required()
 def delete_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
