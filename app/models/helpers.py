@@ -111,3 +111,51 @@ def delete_workout(workout_id):
     db.session.delete(workout)
     db.session.commit()
     return workout
+
+### CLIMB HELPER METHODS ########
+
+def get_climb(climb_id):
+    climb = db.session.query(Climbs).get(climb_id)
+    if climb:
+        return climb
+    else:
+        raise Exception("Climb: {} doesn't exist".format(climb_id))
+
+def create_climb(req_json):
+    new_climb = {}
+    if req_json['type'] == 'boulder':
+        check_valid_grade(0, req_json['grade'])
+        new_climb = Climbs(
+            type = 0,
+            grade = int(req_json['grade']),
+            user_id = req_json['user_id'],
+            workout_id = req_json['workout_id']
+        )
+    elif req_json['type'] == 'routes':
+        check_valid_grade(1, req_json['grade'])
+        grade, letter = grade_and_letter(req_json['grade'])
+        new_climb = Climbs(
+                type = 1,
+                grade = grade,
+                letter_grade = letter,
+                user_id = req_json['user_id'],
+                workout_id = req_json['workout_id']
+            )
+    else:
+        raise Exception("Improperly formatted climb: {}".format(req_json))
+    
+    db.session.add(new_climb)
+    db.session.commit()
+    return new_climb
+
+def update_climb(climb_id, req_json):
+    climb = get_climb(climb_id)
+    climb.update(req_json)
+    db.session.commit()
+    return climb
+
+def delete_climb(climb_id):
+    climb = get_climb(climb_id)
+    db.session.delete(climb)
+    db.session.commit()
+    return climb
