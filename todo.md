@@ -15,6 +15,6 @@ Todo list
     3. [x] Climb
 
 * [ ] Testing
-* [ ] Authentication of certain routes
-    1. [ ] JWT
+* [x] Authentication of certain routes
+    1. [x] JWT
     2. [ ] Login
