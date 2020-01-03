@@ -19,22 +19,22 @@ def hello_world():
 @app_instance.route('/users', methods=['POST'])
 def create_user():
     user = helpers.create_user(request.get_json())
-    return user
+    return user.to_json()
 
 @app_instance.route('/user/<user_id>')
 def get_user(user_id):
     user = helpers.get_user(user_id)
-    return user
+    return user.to_json()
 
 @app_instance.route('/user/<user_id>', methods=['PUT', 'PATCH'])
 def update_user(user_id):
     user = helpers.update_user(user_id, request.get_json())
-    return user
+    return user.to_json()
 
 @app_instance.route('/user/<user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = helpers.delete_user(user_id)
-    return user.id
+    return jsonify({"user_id": user.id})
 
 ### WORKOUT ROUTES ###########
 
@@ -44,7 +44,7 @@ def create_workout(user_id):
     if user_exists:
         try:
             workout = helpers.create_workout(user_id, request.get_json())
-            return workout
+            return workout.to_json()
         except Exception as e:
             print(e)
             return jsonify({"message": str(e)}), 400
@@ -59,7 +59,7 @@ def get_workout(user_id, workout_id):
     if user_exists:
         try:
             workout = helpers.get_workout(workout_id)
-            return workout
+            return workout.to_json()
         except Exception as e:
             print(e)
             return jsonify({"message": str(e)}), 400
@@ -73,7 +73,7 @@ def update_workout(user_id, workout_id):
     if user_exists:
         try:
             workout = helpers.update_workout(workout_id, request.get_json())
-            return workout
+            return workout.to_json()
         except Exception as e:
             print(e)
             return jsonify({"message": str(e)}), 400
@@ -87,7 +87,7 @@ def delete_workout(user_id, workout_id):
     if user_exists:
         try:
             workout = helpers.delete_workout(workout_id)
-            return workout.id
+            return jsonify({"workout_id": workout.id})
         except Exception as e:
             print(e)
             return jsonify({"message": str(e)}), 400
