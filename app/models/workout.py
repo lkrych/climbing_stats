@@ -7,7 +7,7 @@ class Workouts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
     user = db.relationship('Users', back_populates="workouts")
-    climbs = db.relationship('Climbs', back_populates="workout")
+    climbs = db.relationship('Climbs', back_populates="workout", cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<Workout {}>'.format(self.id)
