@@ -22,10 +22,19 @@ source climbing_stats_venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# /users read
+# Unprotected Routes
+
+These routes do not require a JWT
+
+To get a JWT
+
+# /auth
 
 ```bash
-    curl localhost:5000/user/1
+curl -d '{"username":"blah", "password":"blahblah"}' -H "Content-Type: application/json" -X POST http://localhost:5000/auth
+{
+  "access_token": "<ACCESS TOKEN GOES HERE>"
+}
 ```
 
 # /users create
@@ -33,7 +42,19 @@ pip install -r requirements.txt
 ```bash
 curl -d '{"username":"blah", "email":"blahblah@blah.com", "password":"blahblah"}' -H "Content-Type: application/json" -X POST http://localhost:5000/users
 ```
+# Protected Routes
 
+All protected routes need an Authorization Header.
+
+```bash
+curl -H "Authorization: JWT <ACCESS TOKEN GOES HERE>" http://localhost:5000/user/1/workout/2
+```
+
+# /users read
+
+```bash
+    curl localhost:5000/user/1
+```
 # /workout create
 
 The payload can have boulder, routes or both.
