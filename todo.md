@@ -17,4 +17,4 @@ Todo list
 * [ ] Testing
 * [x] Authentication of certain routes
     1. [x] JWT
-    2. [ ] Login
+    2. [x] Login
