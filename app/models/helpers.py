@@ -4,8 +4,13 @@ from app.models.workout import Workouts
 from app.models.climb import Climbs
 
 ### USER HELPER METHODS ###########
+
 def get_user(user_id):
-    return db.session.query(Users).get(user_id)
+    user = db.session.query(Users).get(user_id)
+    if user:
+        return user
+    else:
+        raise Exception("User: {} doesn't exist".format(user_id))
 
 def check_if_user_exists(user_id):
     if get_user(user_id):
@@ -22,6 +27,18 @@ def create_user(req_json):
     db.session.add(new_user)
     db.session.commit()
     return new_user
+
+def update_user(user_id, req_json):
+    user = get_user(user_id)
+    user.update(req_json)
+    db.session.commit()
+    return user
+
+def delete_user(user_id):
+    user = get_user(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return user
 
 def user_dne_exception():
     try:
@@ -46,14 +63,18 @@ def grade_and_letter(g):
     return grade, letter
 
 def get_workout(workout_id):
-    return db.session.query(Workouts).get(workout_id)
+    workout = db.session.query(Workouts).get(workout_id)
+    if workout:
+        return workout
+    else:
+        raise Exception("Workout: {} doesn't exist".format(workout_id))
 
 def create_workout(user_id, req_json):
     new_workout = Workouts(
         date = req_json['date'],
         user_id = user_id
     )
-    if req_json['boulder']:
+    if 'boulder' in req_json:
         for b in req_json['boulder']:
             check_valid_grade(0, b)
             new_b = Climbs(
@@ -63,7 +84,7 @@ def create_workout(user_id, req_json):
             )
             new_workout.climbs.append(new_b)
 
-    if req_json['routes']:
+    if 'routes' in req_json:
         for r in req_json['routes']:
             check_valid_grade(1, r)
             grade, letter = grade_and_letter(r)
@@ -78,4 +99,15 @@ def create_workout(user_id, req_json):
     db.session.add(new_workout)
     db.session.commit()
     return new_workout
-        
+
+def update_workout(workout_id, req_json):
+    workout = get_workout(workout_id)
+    workout.update(req_json)
+    db.session.commit()
+    return workout
+
+def delete_workout(workout_id):
+    workout = get_workout(workout_id)
+    db.session.delete(workout)
+    db.session.commit()
+    return workout
