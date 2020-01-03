@@ -1,18 +1,13 @@
 from flask import request, jsonify
+from flask_jwt import jwt_required
 
 from app import app_instance
-from app.models import helpers
+from app.helpers import model_helpers as helpers
 
-@app_instance.route('/')
-def hello_world():
-    return 'Hello World!'
-
-# @app_instance.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if request.method == 'POST':
-#         return do_the_login()
-#     else:
-#         return show_the_login_form()
+### INVISIBLE ROUTES #############
+# /auth
+# for jwt creation
+# https://pythonhosted.org/Flask-JWT/
 
 ### USER ROUTES ###########
 
@@ -22,16 +17,19 @@ def create_user():
     return user.to_json()
 
 @app_instance.route('/user/<user_id>')
+@jwt_required()
 def get_user(user_id):
     user = helpers.get_user(user_id)
     return user.to_json()
 
 @app_instance.route('/user/<user_id>', methods=['PUT', 'PATCH'])
+@jwt_required()
 def update_user(user_id):
     user = helpers.update_user(user_id, request.get_json())
     return user.to_json()
 
 @app_instance.route('/user/<user_id>', methods=['DELETE'])
+@jwt_required()
 def delete_user(user_id):
     user = helpers.delete_user(user_id)
     return jsonify({"user_id": user.id})
@@ -39,6 +37,7 @@ def delete_user(user_id):
 ### WORKOUT ROUTES ###########
 
 @app_instance.route('/user/<user_id>/workouts', methods=['POST'])
+@jwt_required()
 def create_workout(user_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
@@ -54,6 +53,7 @@ def create_workout(user_id):
 
 
 @app_instance.route('/user/<user_id>/workout/<workout_id>')
+@jwt_required()
 def get_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
@@ -68,6 +68,7 @@ def get_workout(user_id, workout_id):
         return jsonify(), 400
 
 @app_instance.route('/user/<user_id>/workout/<workout_id>', methods=['PUT', 'PATCH'])
+@jwt_required()
 def update_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
@@ -82,6 +83,7 @@ def update_workout(user_id, workout_id):
         return jsonify(), 400
 
 @app_instance.route('/user/<user_id>/workout/<workout_id>', methods=['DELETE'])
+@jwt_required()
 def delete_workout(user_id, workout_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
@@ -98,14 +100,22 @@ def delete_workout(user_id, workout_id):
 ### CLIMBS ROUTES ###########
 
 @app_instance.route('/user/<user_id>/climbs', methods=['POST'])
+@jwt_required()
 def create_climb(user_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
         try:
             climb = helpers.create_climb(request.get_json())
             return climb.to_json()
+        except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
 
 @app_instance.route('/user/<user_id>/climb/<climb_id>')
+@jwt_required()
 def get_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
@@ -120,21 +130,23 @@ def get_climb(user_id, climb_id):
         return jsonify(), 400
 
 @app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['PUT', 'PATCH'])
+@jwt_required()
 def update_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
         try:
             climb = helpers.update_climb(climb_id, request.get_json())
             return climb.to_json()
-    except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
+        except Exception as e:
+                print(e)
+                return jsonify({"message": str(e)}), 400
     else:
         helpers.user_dne_exception()
         return jsonify(), 400
 
 @app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['DELETE'])
-def delete_user(user_id, climb_id):
+@jwt_required()
+def delete_climb(user_id, climb_id):
     user_exists = helpers.check_if_user_exists(user_id)
     if user_exists:
         try:
