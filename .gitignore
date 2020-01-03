@@ -1,2 +1,7 @@
 climbing_stats_venv
 db/climbing_stats.db
+
+*.pyc
+__pycache__/
+
+.vscode
