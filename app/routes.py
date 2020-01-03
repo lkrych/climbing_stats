@@ -94,3 +94,55 @@ def delete_workout(user_id, workout_id):
     else:
         helpers.user_dne_exception()
         return jsonify(), 400
+
+### CLIMBS ROUTES ###########
+
+@app_instance.route('/user/<user_id>/climbs', methods=['POST'])
+def create_climb(user_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climb = helpers.create_climb(request.get_json())
+            return climb.to_json()
+
+@app_instance.route('/user/<user_id>/climb/<climb_id>')
+def get_climb(user_id, climb_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climb = helpers.get_climb(climb_id)
+            return climb.to_json()
+        except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
+
+@app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['PUT', 'PATCH'])
+def update_climb(user_id, climb_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climb = helpers.update_climb(climb_id, request.get_json())
+            return climb.to_json()
+    except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
+
+@app_instance.route('/user/<user_id>/climb/<climb_id>', methods=['DELETE'])
+def delete_user(user_id, climb_id):
+    user_exists = helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climb = helpers.delete_climb(climb_id)
+            return jsonify({"climb_id": climb.id})
+        except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        helpers.user_dne_exception()
+        return jsonify(), 400
