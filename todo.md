@@ -1,5 +1,6 @@
 Todo list
 
+1/2/2020
 * [x] Read/Create Endpoints
     1. [x] User
     2. [x] Workout
@@ -13,8 +14,9 @@ Todo list
     1. [x] User
     2. [x] Workout
     3. [x] Climb
-
+1/3/2020
 * [ ] Testing
 * [x] Authentication of certain routes
     1. [x] JWT
     2. [x] Login
+    3. [ ] Only allow access to resources you own
