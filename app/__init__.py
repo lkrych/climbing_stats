@@ -1,16 +1,15 @@
 from flask import Flask
 from flask_jwt import JWT
-import os
 
 from config import app_config
 
 #application factory function - http://flask.palletsprojects.com/en/1.1.x/tutorial/factory/
 # https://flask.palletsprojects.com/en/1.1.x/patterns/appfactories/
 
-def create_app():
+def create_app(environment='development'):
     #create and configure app
     app_instance = Flask(__name__)
-    app_instance.config.from_object(app_config[os.environ.get('FLASK_ENV')])
+    app_instance.config.from_object(app_config[environment])
 
     from app.helpers import factory_helpers
 
