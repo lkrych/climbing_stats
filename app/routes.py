@@ -4,6 +4,10 @@ from flask_jwt import jwt_required
 from app.helpers import model_helpers as helpers
 route_blueprint = Blueprint('route_blueprint', __name__)
 
+@route_blueprint.route('/')
+def hello_world():
+    return 'Hello World!'
+
 ### INVISIBLE ROUTES #############
 # /auth
 # for jwt creation
