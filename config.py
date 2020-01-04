@@ -16,6 +16,9 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/test_climbing_stats.db')
     DEBUG = True
+    CSRF_ENABLED = False
+    BCRYPT_LOG_ROUNDS = 4
+    SECRET_KEY = 'testing1234'
 
 class StagingConfig(Config):
     DEBUG = True
