@@ -1,5 +1,6 @@
 climbing_stats_venv
 db/climbing_stats.db
+db/test_climbing_stats.db
 
 *.pyc
 __pycache__/
