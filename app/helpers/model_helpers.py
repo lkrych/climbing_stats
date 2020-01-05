@@ -38,7 +38,8 @@ def create_user(req_json):
 
 def update_user(user_id, req_json):
     user = get_user(user_id)
-    user.update(req_json)
+    for key, val in req_json.items():
+        setattr(user, key, val)
     db.session.commit()
     return user
 
@@ -110,7 +111,8 @@ def create_workout(user_id, req_json):
 
 def update_workout(workout_id, req_json):
     workout = get_workout(workout_id)
-    workout.update(req_json)
+    for key, val in req_json.items():
+        setattr(workout, key, val)
     db.session.commit()
     return workout
 
@@ -158,7 +160,8 @@ def create_climb(req_json):
 
 def update_climb(climb_id, req_json):
     climb = get_climb(climb_id)
-    climb.update(req_json)
+    for key, val in req_json.items():
+        setattr(climb, key, val)
     db.session.commit()
     return climb
 
