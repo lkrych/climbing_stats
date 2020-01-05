@@ -22,5 +22,16 @@ Todo list
 * [ ] Testing
     1. [ ] Unit tests
     2. [ ] Functional Tests
+
+
 * [ ] Clean up Readme, combine all of 'em
 * [ ] Data Presentation!
+    * [ ] Histogram
+    * [ ] Summary Stats
+    * [ ] Time period, last week, last month, last year
+* [ ] E-mail confirmation for signup
+* [ ] Strava link/push --> dependent on Data Presentation
+* [ ] Rate-Limiting
+
+Optional stuff
+* [] Git Hook for push?
