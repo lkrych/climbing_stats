@@ -60,6 +60,7 @@ curl -H "Authorization: JWT <ACCESS TOKEN GOES HERE>" http://localhost:5000/user
 The payload can have boulder, routes or both.
 
 ```bash
-curl -d '{"date": 1577865600,"boulder": [5, 6], "routes": ["12d", "11a", "12c", "12c", "11c"]}' -H "Content-Type: application/json" -X POST http://localhost:5000/user/blah/workouts
+curl -d '{"date": 1577865600,"boulder": [5, 6], "routes": ["12d", "11a", "12c", "12c", "11c"]}' -H "Content-Type: application/json"
+-H "Authorization: JWT <ACCESS TOKEN GOES HERE>" -X POST http://localhost:5000/user/blah/workouts
 ```
 
