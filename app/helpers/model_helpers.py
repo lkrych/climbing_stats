@@ -10,7 +10,7 @@ def get_user(user_id):
     if user:
         return user
     else:
-        raise Exception("User: {} doesn't exist".format(user_id))
+        return False
 
 def get_user_by_username(username):
     try:
