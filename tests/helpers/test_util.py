@@ -3,12 +3,9 @@ import json
 def get_auth_response(tc, username, password):
     response = tc.post(
         '/auth',
-        data = json.dumps({
+        json = {
             'username': username,
             'password': password
-        }),
-        headers = {
-            'Content-Type': 'application/json'
         }
     )
     return response
