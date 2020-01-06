@@ -119,4 +119,54 @@ def test_user_delete_auth_limited(test_client, init_database):
     get_response_fail = test_client.get('/user/1', headers = jwt_header)
     assert get_response_fail.status_code == 400
 
+###### /workouts ######################
 
+def test_workout_read_auth_limited():
+    pass
+
+def test_workout_read_belongs_only_to_user():
+    #make sure only the user that owns the workout can view it
+    pass
+
+def test_workout_create_auth_limited():
+    pass
+
+def test_workout_update_auth_limited():
+    pass
+
+def test_workout_update_belongs_only_to_user():
+    #make sure only the user that owns the workout can update it
+    pass
+
+def test_workout_delete_auth_limited():
+    pass
+
+def test_workout_delete_belongs_only_to_user():
+    #make sure only the user that owns the workout can delete it
+    pass
+
+###### /climbs ######################
+
+def test_climb_read_auth_limited():
+    pass
+
+def test_climb_read_belongs_only_to_user():
+    #make sure only the user that owns the climb can view it
+    pass
+
+def test_climb_create_auth_limited():
+    pass
+
+def test_climb_update_auth_limited():
+    pass
+
+def test_climb_update_belongs_only_to_user():
+    #make sure only the user that owns the climb can update it
+    pass
+
+def test_climb_delete_auth_limited():
+    pass
+
+def test_climb_delete_belongs_only_to_user():
+    #make sure only the user that owns the climb can delete it
+    pass
