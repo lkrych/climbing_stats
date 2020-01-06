@@ -3,6 +3,8 @@ import pytest
 from app import create_app
 from app.helpers.factory_helpers import db, bcrypt
 from app.models.user import Users
+from app.models.workout import Workouts
+from app.models.climb import Climbs
 
 @pytest.fixture(scope='module')
 def test_client():
@@ -34,6 +36,27 @@ def init_database():
         password_hash=bcrypt.generate_password_hash('cawcaw').decode('utf-8'))
     db.session.add(user1)
     db.session.add(user2)
+
+    workout1 = Workouts(
+        date = "1578204182.000337",
+        user_id = 2
+    )
+    climb1 = Climbs(
+        type = 0,
+        grade = 6,
+        user_id = 2,
+        workout_id = 1
+    )
+    climb2 = Climbs(
+        type = 0,
+        grade = 5,
+        user_id = 2,
+        workout_id = 1
+    )
+
+    db.session.add(workout1)
+    db.session.add(climb1)
+    db.session.add(climb2)
  
     # Commit the changes for the users
     db.session.commit()
