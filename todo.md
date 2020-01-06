@@ -22,6 +22,10 @@ Todo list
 * [ ] Testing
     1. [ ] Unit tests
     2. [ ] Functional Tests
+        * [ ] Auth
+        * [ ] User
+        * [ ] Workouts
+        * [ ] Climbs
 
 
 * [ ] Clean up Readme, combine all of 'em
@@ -29,7 +33,7 @@ Todo list
     * [ ] Histogram
     * [ ] Summary Stats
     * [ ] Time period, last week, last month, last year
-* [ ] E-mail confirmation for signup
+* [ ] E-mail confirmation for signup to guard user creation
 * [ ] Strava link/push --> dependent on Data Presentation
 * [ ] Rate-Limiting
 
