@@ -121,8 +121,27 @@ def test_user_delete_auth_limited(test_client, init_database):
 
 ###### /workouts ######################
 
-def test_workout_read_auth_limited():
-    pass
+# need to reset the variables
+new_default_username = "cawcaw"
+new_default_password = "cawcaw"
+
+def test_workout_read_auth_limited(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    #request fails without jwt
+    fail_response = test_client.get('/user/2/workout/1')
+    assert fail_response.status_code == 401
+    assert b"Request does not contain an access token" in fail_response.data
+
+    #request succeeds with jwt
+    success_response = test_client.get('/user/2/workout/1', headers = jwt_header)
+    assert success_response.status_code == 200
+
+    #climb is in workout
+    assert b"boulder" in success_response.data
+    #user is in workout
+    assert b"signup_date" in success_response.data
 
 def test_workout_read_belongs_only_to_user():
     #make sure only the user that owns the workout can view it
