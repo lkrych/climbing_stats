@@ -23,8 +23,12 @@ def create_user():
 @route_blueprint.route('/user/<user_id>')
 @jwt_required()
 def get_user(user_id):
-    user = helpers.get_user(user_id)
-    return user.to_json()
+    try:
+        user = helpers.get_user(user_id)
+        return user.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"message": str(e)}), 400
 
 @route_blueprint.route('/user/<user_id>', methods=['PUT', 'PATCH'])
 @jwt_required()
