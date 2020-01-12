@@ -36,6 +36,9 @@ Todo list
 * [ ] E-mail confirmation for signup to guard user creation
 * [ ] Strava link/push --> dependent on Data Presentation
 * [ ] Rate-Limiting
+* [ ] Followers
+* [ ] Kudos
+* [ ] Logging of time to resolve endpoint
 
 Optional stuff
 * [] Git Hook for push?
