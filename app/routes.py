@@ -4,9 +4,9 @@ from flask_jwt import jwt_required
 from app.helpers import model_helpers as helpers
 route_blueprint = Blueprint('route_blueprint', __name__)
 
-@route_blueprint.route('/')
+@route_blueprint.route('/', methods=['GET'])
 def hello_world():
-    return 'Hello World!'
+    return  { 'msg': 'Hello World!' }, 200
 
 ### INVISIBLE ROUTES #############
 # /auth

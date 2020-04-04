@@ -6,10 +6,23 @@ You can enter bouldering workouts or Sport Climbing workouts.
 
 And view your progress across time with the summary command.
 
-### Start server
+### Start server locally
 
 ```bash
-make start
+SECRET_KEY=some_secret_key make start_dev
+```
+
+### Run tests
+
+```bash
+make run_tests
+```
+
+### Docker dev
+
+```bash
+make build_image
+make docker_dev
 ```
 
 ### Development work
