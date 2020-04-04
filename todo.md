@@ -1,4 +1,38 @@
-Todo list
+# Todo list
+
+## MVP 
+
+### 4/3-4/5 Hackathon
+
+* [ ] Data Presentation: Frontend
+    * [ ] Histogram
+    * [ ] Summary Stats
+    * [ ] Time period, last week, last month, last year
+    * [ ] Mobile-first design 
+    * [ ] User stories/features:
+        * [ ] Sign up for service
+        * [ ] Log in to/log out of service
+        * [ ] Log a workout (consisting of 1+ climbs) -> form
+        * [ ] On login, see composite of climbing stats (last week, last month, last year)
+
+* [ ] Containerization and prepare for deployment
+    * [X] Build Docker file
+    * [ ] Terraform plan resources
+
+
+## Nice to have (future hackathon)
+* [ ] Git Hook for push?
+* [ ] Clean up Readme, combine all of 'em
+* [ ] E-mail confirmation for signup to guard user creation
+* [ ] Strava link/push --> dependent on Data Presentation
+* [ ] Rate-Limiting
+* [ ] Followers
+* [ ] Kudos
+* [ ] Logging of time to resolve endpoint
+* [ ] User can see specific workouts/workout stats/notes
+* [ ] User can log what gym they worked out at
+* [ ] Public domain
+
 
 1/2/2020
 * [x] Read/Create Endpoints
@@ -28,17 +62,3 @@ Todo list
         * [ ] Climbs
 
 
-* [ ] Clean up Readme, combine all of 'em
-* [ ] Data Presentation!
-    * [ ] Histogram
-    * [ ] Summary Stats
-    * [ ] Time period, last week, last month, last year
-* [ ] E-mail confirmation for signup to guard user creation
-* [ ] Strava link/push --> dependent on Data Presentation
-* [ ] Rate-Limiting
-* [ ] Followers
-* [ ] Kudos
-* [ ] Logging of time to resolve endpoint
-
-Optional stuff
-* [] Git Hook for push?
