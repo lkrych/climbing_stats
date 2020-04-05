@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default ({ loggedIn }) => {
 
@@ -7,6 +8,7 @@ export default ({ loggedIn }) => {
     if (loggedIn) {
         return (
             <div> 
+                <li>LOGO!</li>
                 <li>Add Workout</li>
                 <li>Logout</li>
             </div>
@@ -14,7 +16,8 @@ export default ({ loggedIn }) => {
     } else {
         return (
             <div>
-                <li><button onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</button></li>
+                <li>LOGO!</li>
+                <NavLink to={showSignup ? "/signup" : "/login"}><button onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</button></NavLink>
             </div>
         )
     }
