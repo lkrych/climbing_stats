@@ -1,5 +1,9 @@
 import React from "react";
 
-export default () => (
-    <h1>Dashboard coming here</h1>
-);
+export default () => {
+    return (
+        <div>
+            <h1>Dashboard coming here</h1>
+        </div>    
+    )
+};
