@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import Signup from "./components/Signup";
+import Login from "./components/Login";
 import Splash from "./components/Splash";
 
 export default () => {
@@ -17,7 +18,7 @@ export default () => {
           <Signup />
         </Route>
         <Route exact path="/login">
-          {/* <Login/> */}
+          <Login/>
         </Route>
         <Route exact path="/">
           <Splash />
