@@ -6,24 +6,15 @@ You can enter bouldering workouts or Sport Climbing workouts.
 
 And view your progress across time with the summary command.
 
-### Start server locally
+### Quickstart
 
-```bash
-SECRET_KEY=some_secret_key make start_dev
-```
 
-### Run tests
-
-```bash
-make run_tests
-```
-
-### Docker dev
-
-```bash
-make build_image
-make docker_dev
-```
+| Command       | Description   |
+| ------------- |-------------|
+| Local Development | ```make start_dev```| 
+| Docker Development | ```make make docker_dev``` |
+| Run Tests | ``` make run_tests``` |   
+| Initialize and Seed Database | ``` init_db ``` |   
 
 ### Development work
 
@@ -34,6 +25,17 @@ python -m venv climbing_stats_venv
 source climbing_stats_venv/bin/activate
 pip install -r requirements.txt
 ```
+
+### Seeding and Resetting Database
+
+```bash 
+flask seed-db
+flask reset-db
+```
+
+More [database information](db/README.md)
+
+### API Examples
 
 # Unprotected Routes
 
