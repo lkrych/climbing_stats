@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_jwt import JWT
+from flask_cors import CORS
 
 from config import app_config
 
@@ -15,6 +16,7 @@ def create_app(environment='development'):
 
     factory_helpers.db.init_app(app_instance)
     factory_helpers.bcrypt.init_app(app_instance)
+    CORS(app_instance)
     # hack for resolving circular import between auth_helpers and this file
     from app.helpers import auth_helpers
     jwt = JWT(app_instance, auth_helpers.authenticate, auth_helpers.identity)
