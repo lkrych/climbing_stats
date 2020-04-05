@@ -21,4 +21,9 @@ def create_app(environment='development'):
     
     from app.routes import route_blueprint
     app_instance.register_blueprint(route_blueprint)
+
+    from app.helpers.seeds import seed_db, reset_db
+    app_instance.cli.add_command(seed_db)
+    app_instance.cli.add_command(reset_db)
+
     return app_instance

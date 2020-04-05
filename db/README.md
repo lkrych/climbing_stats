@@ -2,13 +2,7 @@
 
 The MVP uses Sqlite as the data store.
 
-To initialize the database called `climbing_stats.db`, please run `init_db.py`
-
-```bash
-python init_db.py
-```
-
-This file creates the database and loads the sql files from the `tables` directory.
+This file creates the database and loads the sql files from the `migrations` directory.
 
 ## Schema
 

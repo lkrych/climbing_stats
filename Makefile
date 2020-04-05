@@ -10,9 +10,13 @@ run_tests:
 build_image:
 	docker build -t climbing_stats_img .
 
-docker_dev:
+docker_dev: build_image
 	docker run \
 	--name climbing_stats_container \
 	--rm \
 	-p 5000:5000 \
 	climbing_stats_img
+
+init_db:
+	cd db && python init_db.py
+	flask seed-db
