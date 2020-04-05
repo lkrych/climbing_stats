@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-export default ({ loggedIn }) => {
-
-    const [showSignup, setShowSignup] = useState(false);
+export default ({ loggedIn, showSignup, setShowSignup }) => {
 
     if (loggedIn) {
         return (
