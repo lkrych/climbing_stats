@@ -5,7 +5,7 @@ export default () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const submitSignup = (e) => {
+    const submitLogin = (e) => {
         e.preventDefault();
         postRequest("/auth",
             {
@@ -18,7 +18,7 @@ export default () => {
     }
 
     return (
-        <form onSubmit={(e) => submitSignup(e)}>
+        <form onSubmit={(e) => submitLogin(e)}>
             <label>Username: </label>
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             <br />
