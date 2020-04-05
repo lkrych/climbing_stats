@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import Signup from "./components/Signup";
+import Splash from "./components/Splash";
 
 export default () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -12,8 +13,14 @@ export default () => {
     <BrowserRouter>
       <Nav loggedIn={loggedIn} showSignup={showSignup} setShowSignup={setShowSignup}/>
       <Switch>
-        <Route>
-            <Signup />
+        <Route exact path="/signup">
+          <Signup />
+        </Route>
+        <Route exact path="/login">
+          {/* <Login/> */}
+        </Route>
+        <Route exact path="/">
+          <Splash />
         </Route>
       </Switch>
     </BrowserRouter>
