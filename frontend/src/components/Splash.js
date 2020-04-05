@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default () => (
     <div>
@@ -6,8 +7,8 @@ export default () => (
         <div>
             <p>Scroll down to see this paragraph about how to use this app. Get started below</p>
             <div>
-                <button>Sign Up</button>
-                <button>Log In</button>
+                <NavLink to="/signup"><button>Sign Up</button></NavLink>
+                <NavLink to="/login"><button>Log In</button></NavLink>
             </div>
         </div>
     </div>
