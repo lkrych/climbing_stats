@@ -12,9 +12,9 @@ def get_user(user_id):
     else:
         return False
 
-def get_user_by_username(username):
+def get_user_by_username_or_email(username_or_email):
     try:
-        user = db.session.query(Users).filter(Users.username == username).one()
+        user = db.session.query(Users).filter((Users.username == username_or_email) | (Users.email == username_or_email)).one()
         return user
     except Exception as e:
         print(e)
