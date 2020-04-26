@@ -11,10 +11,10 @@ And view your progress across time with the summary command.
 
 | Command       | Description   |
 | ------------- |-------------|
-| Local Development | ```make start_dev```| 
-| Docker Development | ```make docker_dev``` |
-| Run Tests | ``` make run_tests``` |   
-| Initialize and Seed Database | ``` make init_db ``` |   
+| Local Development | ```make start-dev```| 
+| Docker Development | ```make docker-dev``` |
+| Run Tests | ``` make run-tests``` |   
+| Initialize and Seed Database | ``` make init-db ``` |   
 
 ### Development work
 

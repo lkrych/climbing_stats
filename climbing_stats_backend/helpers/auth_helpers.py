@@ -1,5 +1,5 @@
-from app.helpers import factory_helpers
-from app.helpers import model_helpers
+from climbing_stats_backend.helpers import factory_helpers
+from climbing_stats_backend.helpers import model_helpers
 
 # used to authenticate user
 # a post to the /auth endpoint routes to this function

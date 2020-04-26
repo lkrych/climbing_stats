@@ -1,5 +1,5 @@
 from datetime import datetime
-from app.helpers.factory_helpers import db
+from climbing_stats_backend.helpers.factory_helpers import db
 
 class Workouts(db.Model):
     id = db.Column(db.Integer, primary_key=True)

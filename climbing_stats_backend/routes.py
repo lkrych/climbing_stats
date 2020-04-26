@@ -1,7 +1,7 @@
 from flask import request, jsonify, Blueprint
 from flask_jwt import jwt_required
 
-from app.helpers import model_helpers as helpers
+from climbing_stats_backend.helpers import model_helpers as helpers
 route_blueprint = Blueprint('route_blueprint', __name__)
 
 @route_blueprint.route('/', methods=['GET'])
