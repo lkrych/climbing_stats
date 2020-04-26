@@ -6,6 +6,15 @@ start_dev:
 	SECRET_KEY=$(SECRET_KEY) \
 	python3 -m flask run --host=0.0.0.0
 
+start_local:
+	FLASK_APP=app/start_app.py \
+	FLASK_ENV=development \
+	SECRET_KEY=$(SECRET_KEY) \
+	python3 -m flask run 
+
+start_frontend:
+	cd frontend && npm start
+
 run_tests:
 	python -m pytest
 
