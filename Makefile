@@ -21,11 +21,12 @@ run-tests:
 build-image:
 	docker build -t climbing_stats_img .
 
-docker-dev: build_image
+docker-dev: build-image
 	docker run \
 	--name climbing_stats_container \
 	--rm \
 	-p 5000:5000 \
+	-it \
 	climbing_stats_img
 
 init-db:
