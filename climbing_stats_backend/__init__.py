@@ -30,6 +30,3 @@ def create_app(environment='development'):
     app_instance.cli.add_command(reset_db)
 
     return app_instance
-
-if __name__ == __main__ :
-    create_app(os.environ.get('FLASK_ENV'))
