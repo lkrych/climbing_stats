@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default ({ loggedIn, showSignup, setShowSignup }) => {
+export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
+
+    const logOut = (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem('jwt');
+        setLoggedIn(false);
+    }
 
     if (loggedIn) {
         return (
             <div> 
                 <li>LOGO!</li>
                 <li>Add Workout</li>
-                <li>Logout</li>
+                <li><button onClick={(e) => logOut(e)}> Logout</button></li>
             </div>
         )
     } else {

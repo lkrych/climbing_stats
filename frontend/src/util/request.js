@@ -1,7 +1,14 @@
 const API_HOST = process.env.API_HOST
 
 export const getRequest = (route) => {
-    fetch(`http://${API_HOST}${route}`)
+    fetch(`http://${API_HOST}${route}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': `JWT ${sessionStorage.getItem('jwt')}`,
+        }
+    }
+        )
         .then((response) => {
             return response.json();
         })
@@ -10,17 +17,17 @@ export const getRequest = (route) => {
 export const postRequest = (route, data) => {
     const url = `http://${API_HOST}${route}`
     console.log(`posting to ${url} with ${JSON.stringify(data)}`)
-    fetch(url, {
+   return fetch(url, {
         method: 'POST',
-        // mode: 'no-cors', // don't do this in production ;)
         body: JSON.stringify(data),
         headers: {
             'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': `JWT ${sessionStorage.getItem('jwt')}`,
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+
           },
-    })
-        .then((response) => {
+    }).then((response) => {
             return response.json();
-        })
+    })
 }
