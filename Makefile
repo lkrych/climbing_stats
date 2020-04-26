@@ -1,5 +1,7 @@
+FLASK_APP := climbing_stats_backend
+
 start_dev:
-	FLASK_APP=app/start_app.py \
+	FLASK_APP=${FLASK_APP} \
 	FLASK_ENV=development \
 	SECRET_KEY=$(SECRET_KEY) \
 	python3 -m flask run --host=0.0.0.0
