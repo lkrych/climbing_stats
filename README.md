@@ -12,9 +12,9 @@ And view your progress across time with the summary command.
 | Command       | Description   |
 | ------------- |-------------|
 | Local Development | ```make start_dev```| 
-| Docker Development | ```make make docker_dev``` |
+| Docker Development | ```make docker_dev``` |
 | Run Tests | ``` make run_tests``` |   
-| Initialize and Seed Database | ``` init_db ``` |   
+| Initialize and Seed Database | ``` make init_db ``` |   
 
 ### Development work
 
@@ -26,11 +26,11 @@ source climbing_stats_venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Seeding and Resetting Database
+### Resetting and Seeding Database
 
-```bash 
+```bash
+flask reset-db 
 flask seed-db
-flask reset-db
 ```
 
 More [database information](db/README.md)
