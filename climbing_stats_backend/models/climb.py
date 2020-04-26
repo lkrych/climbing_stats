@@ -1,4 +1,4 @@
-from app.helpers.factory_helpers import db
+from climbing_stats_backend.helpers.factory_helpers import db
 
 class Climbs(db.Model):
     id = db.Column(db.Integer, primary_key=True)

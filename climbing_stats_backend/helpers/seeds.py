@@ -3,10 +3,10 @@ from flask.cli import with_appcontext
 import datetime
 from random import randrange
 
-from app.helpers.factory_helpers import db, bcrypt
-from app.models.user import Users
-from app.models.workout import Workouts
-from app.models.climb import Climbs
+from climbing_stats_backend.helpers.factory_helpers import db, bcrypt
+from climbing_stats_backend.models.user import Users
+from climbing_stats_backend.models.workout import Workouts
+from climbing_stats_backend.models.climb import Climbs
 
 @click.command()
 @with_appcontext

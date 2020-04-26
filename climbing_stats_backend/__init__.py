@@ -13,19 +13,19 @@ def create_app(environment='development'):
     app_instance = Flask(__name__)
     app_instance.config.from_object(app_config[environment])
 
-    from app.helpers import factory_helpers
+    from climbing_stats_backend.helpers import factory_helpers
 
     factory_helpers.db.init_app(app_instance)
     factory_helpers.bcrypt.init_app(app_instance)
     CORS(app_instance)
     # hack for resolving circular import between auth_helpers and this file
-    from app.helpers import auth_helpers
+    from climbing_stats_backend.helpers import auth_helpers
     jwt = JWT(app_instance, auth_helpers.authenticate, auth_helpers.identity)
     
-    from app.routes import route_blueprint
+    from climbing_stats_backend.routes import route_blueprint
     app_instance.register_blueprint(route_blueprint)
 
-    from app.helpers.seeds import seed_db, reset_db
+    from climbing_stats_backend.helpers.seeds import seed_db, reset_db
     app_instance.cli.add_command(seed_db)
     app_instance.cli.add_command(reset_db)
 
