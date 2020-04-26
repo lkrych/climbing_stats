@@ -11,4 +11,4 @@ WORKDIR /climbing_stats
 
 RUN pip3 install -r requirements.txt
 
-CMD ["make", "start_dev"]
+CMD ["make", "start-dev"]
