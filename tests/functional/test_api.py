@@ -58,7 +58,7 @@ def test_user_create(test_client, init_database):
     assert success_response.status_code == 200
     assert b"newuser" in success_response.data
 
-    new_user_id = json.loads(success_response.data)['id']
+    new_user_id = json.loads(success_response.data)['user']['id']
 
     #verify that new user can access auth_limited endpoints
     auth_response = test_util.get_auth_response(test_client, username, password)
