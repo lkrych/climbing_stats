@@ -35,7 +35,10 @@ def login():
 @route_blueprint.route('/users', methods=['POST'])
 def create_user():
     user = helpers.create_user(request.get_json())
-    return {'user': user.to_json() }, 200
+    #handle user creation errors here
+    access_token = create_access_token(identity=user)
+    return jsonify(access_token=access_token), 200
+
 
 @route_blueprint.route('/user/<user_id>')
 @jwt_required()

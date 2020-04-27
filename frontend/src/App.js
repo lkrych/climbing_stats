@@ -15,7 +15,7 @@ export default () => {
       <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} showSignup={showSignup} setShowSignup={setShowSignup}/>
       <Switch>
         <Route exact path="/signup">
-          <Signup />
+          <Signup setLoggedIn={setLoggedIn} />
         </Route>
         <Route exact path="/login">
           <Login setLoggedIn={setLoggedIn}/>
