@@ -9,23 +9,22 @@ def test_hello_world(test_client):
     assert response.status_code == 200
     assert b"Hello World!" in response.data
 
-###### /auth ######################
-def test_auth_200_returns_jwt(test_client, init_database):
+###### /login ######################
+def test_login_200_returns_jwt(test_client, init_database):
     response = test_util.get_auth_response(test_client, default_username, default_password)
-    print(vars(response))
     assert response.status_code == 200
     assert b"access_token" in response.data
 
-def test_auth_401_incorrect_password(test_client, init_database):
+def test_login_401_incorrect_password(test_client, init_database):
     response = test_util.get_auth_response(test_client, default_username, 'cawcaw')
     assert response.status_code == 401
-    assert b"Invalid credentials" in response.data
+    assert b"Bad username or password" in response.data
 
-def test_auth_401_user_dne(test_client, init_database):
+def test_login_401_user_dne(test_client, init_database):
     #user does not exist!
     response = test_util.get_auth_response(test_client, 'wahwah', default_password)
     assert response.status_code == 401
-    assert b"Invalid credentials" in response.data
+    assert b"Bad username or password" in response.data
 
 ###### /user ######################
 
@@ -36,7 +35,7 @@ def test_user_read_auth_limited(test_client, init_database):
     #request fails without jwt
     fail_response = test_client.get('/user/1')
     assert fail_response.status_code == 401
-    assert b"Request does not contain an access token" in fail_response.data
+    assert b"Missing Authorization Header" in fail_response.data
 
     #request succeeds with jwt
     success_response = test_client.get('/user/1', headers = jwt_header)
@@ -56,17 +55,7 @@ def test_user_create(test_client, init_database):
         }
     )
     assert success_response.status_code == 200
-    assert b"newuser" in success_response.data
-
-    new_user_id = json.loads(success_response.data)['user']['id']
-
-    #verify that new user can access auth_limited endpoints
-    auth_response = test_util.get_auth_response(test_client, username, password)
-    jwt_header = test_util.create_jwt_header(auth_response.data)
-
-    success_response = test_client.get('/user/{}'.format(new_user_id), headers = jwt_header)
-    assert success_response.status_code == 200
-    assert b"newuser" in success_response.data
+    assert b"access_token" in success_response.data
 
 
 def test_user_update_auth_limited(test_client, init_database):
@@ -76,7 +65,7 @@ def test_user_update_auth_limited(test_client, init_database):
     #request fails without jwt
     fail_response = test_client.put('/user/1')
     assert fail_response.status_code == 401
-    assert b"Request does not contain an access token" in fail_response.data
+    assert b"Missing Authorization Header" in fail_response.data
 
     #verify that record is unchanged before update call
     get_response = test_client.get('/user/1', headers = jwt_header)
@@ -104,7 +93,7 @@ def test_user_delete_auth_limited(test_client, init_database):
 #   request fails without jwt
     fail_response = test_client.delete('/user/1')
     assert fail_response.status_code == 401
-    assert b"Request does not contain an access token" in fail_response.data
+    assert b"Missing Authorization Header" in fail_response.data
 
     #assert user exists
     get_response = test_client.get('/user/1', headers = jwt_header)
@@ -132,7 +121,7 @@ def test_workout_read_auth_limited(test_client, init_database):
     #request fails without jwt
     fail_response = test_client.get('/user/2/workout/1')
     assert fail_response.status_code == 401
-    assert b"Request does not contain an access token" in fail_response.data
+    assert b"Missing Authorization Header" in fail_response.data
 
     #request succeeds with jwt
     success_response = test_client.get('/user/2/workout/1', headers = jwt_header)
