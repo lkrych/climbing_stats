@@ -5,7 +5,7 @@ export const getRequest = (route) => {
         headers: {
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*',
-            'Authorization': `JWT ${sessionStorage.getItem('jwt')}`,
+            'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
         }
     }
         )
@@ -23,7 +23,7 @@ export const postRequest = (route, data) => {
         headers: {
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*',
-            'Authorization': `JWT ${sessionStorage.getItem('jwt')}`,
+            'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
             'Content-Type': 'application/json',
 
           },
