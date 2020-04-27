@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_jwt import JWT
+from flask_jwt_extended import (JWTManager)
 from flask_cors import CORS
 import os
 
@@ -20,7 +20,7 @@ def create_app(environment='development'):
     CORS(app_instance)
     # hack for resolving circular import between auth_helpers and this file
     from climbing_stats_backend.helpers import auth_helpers
-    jwt = JWT(app_instance, auth_helpers.authenticate, auth_helpers.identity)
+    jwt = JWTManager(app_instance)
     
     from climbing_stats_backend.routes import route_blueprint
     app_instance.register_blueprint(route_blueprint)

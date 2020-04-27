@@ -1,5 +1,5 @@
 from flask import request, jsonify, Blueprint
-from flask_jwt import jwt_required
+from flask_jwt_extended import jwt_required, create_access_token
 
 from climbing_stats_backend.helpers import model_helpers as helpers
 route_blueprint = Blueprint('route_blueprint', __name__)
@@ -8,12 +8,29 @@ route_blueprint = Blueprint('route_blueprint', __name__)
 def hello_world():
     return  { 'msg': 'Hello World!' }, 200
 
-### INVISIBLE ROUTES #############
-# /auth
-# for jwt creation
-# https://pythonhosted.org/Flask-JWT/
+@route_blueprint.route('/login', methods=['POST'])
+def login():
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
 
-### USER ROUTES ###########
+    usernameOrEmail = request.json.get('username', None)
+    password = request.json.get('password', None)
+    if not username:
+        return jsonify({"msg": "Missing username parameter"}), 400
+    if not password:
+        return jsonify({"msg": "Missing password parameter"}), 400
+
+    user = model_helpers.get_user_by_username_or_email(usernameOrEmail)
+    if user and factory_helpers.bcrypt.check_password_hash(user.password_hash, password):
+        return user
+
+    if not user
+        return jsonify({"msg": "Bad username or password"}), 401
+
+    # Identity can be any data that is json serializable
+    access_token = create_access_token(identity=user)
+    return jsonify(access_token=access_token), 200
+
 
 @route_blueprint.route('/users', methods=['POST'])
 def create_user():
