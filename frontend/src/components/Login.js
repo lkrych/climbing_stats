@@ -24,7 +24,7 @@ export default ({ setLoggedIn }) => {
         ).then((json) => {
             console.log(json);
             if (!json.access_token) {
-                setError(json.description)
+                setError(json.description);
             } else {
                 setError(''); 
                 sessionStorage.setItem('jwt', json.access_token);
