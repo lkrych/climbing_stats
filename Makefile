@@ -16,7 +16,7 @@ start-frontend:
 	cd frontend && npm start
 
 run-tests:
-	python -m pytest
+	pytest --setup-show
 
 build-image:
 	docker build -t climbing_stats_img .
