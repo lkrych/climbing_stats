@@ -38,9 +38,13 @@ def init_database():
     user3 = Users(username='impersonator',
         email='impersonator@gmail.com',
         password_hash=bcrypt.generate_password_hash('impersonator').decode('utf-8'))
+    user4 = Users(username='malicious',
+        email='malicious@gmail.com',
+        password_hash=bcrypt.generate_password_hash('malicious').decode('utf-8'))
     db.session.add(user1)
     db.session.add(user2)
     db.session.add(user3)
+    db.session.add(user4)
 
     workout1 = Workouts(
         date = "1578204182.000337",
