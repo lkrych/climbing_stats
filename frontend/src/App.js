@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Splash from "./components/Splash";
+import Dashboard from "./components/Dashboard";
 
 export default () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,6 +23,9 @@ export default () => {
         </Route>
         <Route exact path="/">
           <Splash />
+        </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
         </Route>
       </Switch>
     </BrowserRouter>
