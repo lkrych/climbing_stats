@@ -16,7 +16,7 @@ export default ({ setLoggedIn }) => {
         setPassword('');
 
         
-        postRequest("/auth",
+        postRequest("/login",
             {
                 "username": username,
                 "password": pass
