@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { postRequest } from "../util/request";
 
 export default ({setLoggedIn}) => {
@@ -7,10 +8,12 @@ export default ({setLoggedIn}) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [passError, setPassError] = useState('');
+    let history = useHistory();
 
     const submitSignup = (e) => {
         e.preventDefault();
-        if (!validatePassword) {
+        if (!validatePassword(password)) {
+            console.log('invalid password');
             setPassError('Your password must be at least six characters long and include at least one special character, and one number.')
         } else {
             const usern = username;
@@ -19,7 +22,7 @@ export default ({setLoggedIn}) => {
             setEmail('');
             setUsername('');
             setPassword('');
-
+            setPassError('');
             postRequest("/users",
                 {
                     "username": usern,
@@ -34,12 +37,14 @@ export default ({setLoggedIn}) => {
                     setError('');
                     sessionStorage.setItem('jwt', json.access_token);
                     setLoggedIn(true);
+                    history.push("/dashboard");
                 }
             });
         } 
     }
 
     const validatePassword = (password) => {
+        console.log("checkin' password!")
         let specialChars = "~!@#$%^&*()_+`{}[];:'<>?/,.";
         let nums = "1234567890";
 
