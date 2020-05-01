@@ -1,10 +1,12 @@
 import React, { Fragment, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { postRequest } from "../util/request";
 
 export default ({ setLoggedIn }) => {
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+    let history = useHistory();
 
     const submitLogin = (e) => {
         e.preventDefault();
@@ -29,6 +31,7 @@ export default ({ setLoggedIn }) => {
                 setError(''); 
                 sessionStorage.setItem('jwt', json.access_token);
                 setLoggedIn(true);
+                history.push("/dashboard");
             }
         });
     }
