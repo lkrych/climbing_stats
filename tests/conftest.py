@@ -25,6 +25,7 @@ def test_client():
 @pytest.fixture(scope='module')
 def init_database():
     # Create the database and the database table
+    db.drop_all()
     db.create_all()
  
     # Insert user data

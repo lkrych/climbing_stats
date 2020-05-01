@@ -18,8 +18,6 @@ def create_app(environment='development'):
     factory_helpers.db.init_app(app_instance)
     factory_helpers.bcrypt.init_app(app_instance)
     CORS(app_instance)
-    # hack for resolving circular import between auth_helpers and this file
-    from climbing_stats_backend.helpers import auth_helpers
     jwt = JWTManager(app_instance)
     
     from climbing_stats_backend.routes import route_blueprint
