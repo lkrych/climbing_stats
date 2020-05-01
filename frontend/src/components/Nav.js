@@ -12,7 +12,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     if (loggedIn) {
         return (
             <div> 
-                <li>LOGO!</li>
+                <NavLink to="/"><li>LOGO!</li></NavLink>
                 <li>Add Workout</li>
                 <li><button onClick={(e) => logOut(e)}> Logout</button></li>
             </div>
@@ -20,7 +20,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     } else {
         return (
             <div>
-                <li>LOGO!</li>
+                <NavLink to="/"><li>LOGO!</li></NavLink>
                 <NavLink to={showSignup ? "/signup" : "/login"}><button onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</button></NavLink>
             </div>
         )
