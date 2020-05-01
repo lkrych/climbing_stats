@@ -43,10 +43,10 @@ These routes do not require a JWT
 
 To get a JWT
 
-# /auth
+# /login
 
 ```bash
-curl -d '{"username":"blah", "password":"blahblah"}' -H "Content-Type: application/json" -X POST http://localhost:5000/auth
+curl -d '{"username":"blah", "password":"blahblah"}' -H "Content-Type: application/json" -X POST http://localhost:5000/login
 {
   "access_token": "<ACCESS TOKEN GOES HERE>"
 }
