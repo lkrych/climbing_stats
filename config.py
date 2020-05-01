@@ -1,4 +1,5 @@
 import os
+import secrets
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -7,7 +8,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'db/climbing_stats.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = secrets.token_hex(16)
 
 class DevelopmentConfig(Config):
     DEBUG = True
