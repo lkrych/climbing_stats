@@ -33,7 +33,7 @@ def create_user(req_json):
         password_hash = bcrypt.generate_password_hash(req_json['password']).decode('utf-8')
     )
     db.session.add(new_user)
-    db.session.commit()
+    db.session.commit() #adds user to dc
     return new_user
 
 def update_user(user_id, req_json):
