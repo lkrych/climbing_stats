@@ -17,7 +17,7 @@ Supports both bouldering workouts or sport climbing workouts.
 | Local Development | ```make start-dev```| 
 | Docker Development | ```make docker-dev``` |
 | Frontend Devleopment | ``` make frontend-dev ``` |
-| Run Tests | ``` make run-tests``` |   
+| Run Tests | ``` make test``` |   
 | Initialize and Seed Database | ``` make init-db ``` |   
 
 ### Development work
