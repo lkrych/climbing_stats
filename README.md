@@ -48,6 +48,7 @@ climbing_stats/
 ├── climbing_stats_backend/       <--- Flask backend directory
       ├── __init__.py                 <--- Flask entrypoint, initializes connection with database and registers routes
       ├── routes.py                   <--- Defines routes for service
+      ├── config.py                   <--- Application configuration
       ├── helpers/                    <--- Directory of helpful functions
           ├── auth_helpers.py             <--- Definition of JWT auth decorator
           ├── factory_helpers.py          <--- Initalizes DB and Bcrypt 
