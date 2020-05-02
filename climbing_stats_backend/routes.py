@@ -79,6 +79,20 @@ def create_workout(user_id):
         model_helpers.user_dne_exception()
         return jsonify(), 400
 
+@route_blueprint.route('/user/<user_id>/workouts', methods=['GET'])
+@auth_helpers.authorize
+def get_all_workouts(user_id):
+    user_exists = model_helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climbs = model_helpers.get_all_workouts()
+            return jsonify ({ "workouts": workouts }), 200
+        except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        model_helpers.user_dne_exception()
+        return jsonify(), 400
 
 @route_blueprint.route('/user/<user_id>/workout/<workout_id>')
 @auth_helpers.authorize
@@ -150,6 +164,21 @@ def get_climb(user_id, climb_id):
         try:
             climb = model_helpers.get_climb(climb_id)
             return climb.to_json()
+        except Exception as e:
+            print(e)
+            return jsonify({"message": str(e)}), 400
+    else:
+        model_helpers.user_dne_exception()
+        return jsonify(), 400
+
+@route_blueprint.route('/user/<user_id>/climbs', methods=['GET'])
+@auth_helpers.authorize
+def get_all_climbs(user_id):
+    user_exists = model_helpers.check_if_user_exists(user_id)
+    if user_exists:
+        try:
+            climbs = model_helpers.get_all_climbs()
+            return jsonify ({ "climbs": climbs }), 200
         except Exception as e:
             print(e)
             return jsonify({"message": str(e)}), 400
