@@ -19,10 +19,10 @@ export default () => {
           <Signup setLoggedIn={setLoggedIn} />
         </Route>
         <Route exact path="/login">
-          <Login setLoggedIn={setLoggedIn}/>
+          <Login setLoggedIn={setLoggedIn} />
         </Route>
         <Route exact path="/">
-          <Splash />
+          <Splash setShowSignup={setShowSignup} />
         </Route>
         <Route exact path="/dashboard">
           <Dashboard />
