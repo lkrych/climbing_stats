@@ -30,3 +30,9 @@ This file creates the database and loads the sql files from the `migrations` dir
 ## Changing the schema
 
 If you need to change the database schema, please create a sql file in the migrations file. 
+
+## Interacting with the database
+
+```bash
+sqlite3 climbing_stats.db
+```

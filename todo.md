@@ -10,14 +10,21 @@
     * [ ] Time period, last week, last month, last year
     * [ ] Mobile-first design 
     * [ ] User stories/features:
-        * [ ] Sign up for service
-        * [ ] Log in to/log out of service
+        * [x] Sign up for service
+        * [x] Log in to/log out of service
         * [ ] Log a workout (consisting of 1+ climbs) -> form
         * [ ] On login, see composite of climbing stats (last week, last month, last year)
+
+* [ ] Backend
+    * [ ] use a production-grade server in docker
 
 * [ ] Containerization and prepare for deployment
     * [X] Build Docker file
     * [ ] Terraform plan resources
+* [ ] CI/CD
+    * [ ] Backend Testing
+    * [ ] Frontend Testing
+    * [ ] CI with GitHub
 
 
 ## Nice to have (future hackathon)

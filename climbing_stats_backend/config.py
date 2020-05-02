@@ -6,7 +6,7 @@ class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'db/climbing_stats.db')
+        'sqlite:///' + os.path.join(basedir, '../db/climbing_stats.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_hex(16)
 
@@ -15,7 +15,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/test_climbing_stats.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '../db/test_climbing_stats.db')
     DEBUG = True
     CSRF_ENABLED = False
     BCRYPT_LOG_ROUNDS = 4
