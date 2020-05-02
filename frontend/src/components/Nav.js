@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, useHistory } from "react-router-dom";
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
-
+    let history = useHistory();
     const logOut = (e) => {
         e.preventDefault();
         sessionStorage.removeItem('jwt');
         setLoggedIn(false);
+        history.push("/")
     }
 
     if (loggedIn) {
