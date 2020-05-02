@@ -15,7 +15,7 @@ start-local:
 frontend-dev:
 	cd frontend && npm start
 
-run-tests:
+test:
 	pytest --setup-show
 
 build-image:
