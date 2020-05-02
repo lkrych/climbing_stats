@@ -12,10 +12,10 @@ start-local:
 	SECRET_KEY=$(SECRET_KEY) \
 	python3 -m flask run 
 
-start-frontend:
+frontend-dev:
 	cd frontend && npm start
 
-run-tests:
+test:
 	pytest --setup-show
 
 build-image:
