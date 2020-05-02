@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
