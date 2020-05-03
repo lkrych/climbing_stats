@@ -95,7 +95,7 @@ def get_all_workouts(user_id):
 @auth_helpers.authorize
 def get_workout(user_id, workout_id):
     try:
-        workout = model_helpers.get_workout(workout_id)
+        workout = model_helpers.get_workout(user_id, workout_id)
         return workout.to_json()
     except Exception as e:
         print(e)
@@ -117,7 +117,7 @@ def update_workout(user_id, workout_id):
 @auth_helpers.authorize
 def delete_workout(user_id, workout_id):
     try:
-        workout = model_helpers.delete_workout(workout_id)
+        workout = model_helpers.delete_workout(user_id, workout_id)
         return jsonify({"workout_id": workout.id})
     except Exception as e:
         print(e)
@@ -141,7 +141,7 @@ def create_climb(user_id):
 @auth_helpers.authorize
 def get_climb(user_id, climb_id):
     try:
-        climb = model_helpers.get_climb(climb_id)
+        climb = model_helpers.get_climb(user_id, climb_id)
         return climb.to_json()
     except Exception as e:
         print(e)
@@ -166,7 +166,7 @@ def update_climb(user_id, climb_id):
 def delete_climb(user_id, climb_id):
 
     try:
-        climb = model_helpers.delete_climb(climb_id)
+        climb = model_helpers.delete_climb(user_id, climb_id)
         return jsonify({"climb_id": climb.id})
     except Exception as e:
         print(e)
