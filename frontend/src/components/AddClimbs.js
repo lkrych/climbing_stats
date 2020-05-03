@@ -28,12 +28,12 @@ export default ({boulders, setBoulders, routes, setRoutes}) => {
             <button onClick={(e) => toggleBoulderForm(e)}>
                 Add Boulder
             </button>
-            {showBoulderForm ? <ClimbForm type="boulder" addClimb={setBoulders} /> : null}
+            {showBoulderForm ? <ClimbForm type="boulder" addClimb={setBoulders} climbs={boulders} /> : null}
             <br></br>
             <button onClick={(e) => toggleRouteForm(e)}>
                 Add Route
             </button>
-            {showRouteForm ? <ClimbForm type="route" addClimb={setRoutes} /> : null}
+            {showRouteForm ? <ClimbForm type="route" addClimb={setRoutes} climbs={routes} /> : null}
         </Fragment>
     );
 }
