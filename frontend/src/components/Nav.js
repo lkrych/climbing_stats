@@ -1,21 +1,35 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     let history = useHistory();
+    let location = useLocation();
+
     const logOut = (e) => {
         e.preventDefault();
-        sessionStorage.removeItem('jwt');
+        localStorage.removeItem('jwt');
         setLoggedIn(false);
         history.push("/")
     }
+
+    const goToWorkout = (e) => {
+      e.preventDefault();
+      console.log(location.pathname);
+      history.push('/workout/create')  
+    };
+
+    const addWorkoutLink = (<li>
+                            <button onClick={(e) => goToWorkout(e)}>Add Workout</button>
+                        </li>);
 
     if (loggedIn) {
         return (
             <div> 
                 <NavLink to="/"><li onClick={() => setShowSignup(false)}>LOGO!</li></NavLink>
-                <li>Add Workout</li>
-                <li><button onClick={(e) => logOut(e)}> Logout</button></li>
+                { location.pathname == "/workout/create" ? null : addWorkoutLink }
+                <li>
+                    <button onClick={(e) => logOut(e)}> Logout</button>
+                </li>
             </div>
         )
     } else {
