@@ -239,7 +239,6 @@ def test_workout_update_auth_limited(test_client, init_database):
     )
     assert success_response.status_code == 200
    
-    print(success_response.json)
     assert b"climbs" in success_response.data
     assert success_response.json['climbs'][2]['grade'] == 14
 
