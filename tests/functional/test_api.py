@@ -159,6 +159,14 @@ def test_workout_read_belongs_only_to_user(test_client, init_database):
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
 
+def test_workout_read_user_cannot_read_anothers_workout(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.get('/user/3/workout/1', headers = jwt_header)
+    assert fail_response.status_code == 400
+    assert b"There was a problem fetching the workout" in fail_response.data
+
 def test_workouts_read_auth_limited(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
     jwt_header = test_util.create_jwt_header(auth_response.data)
@@ -177,10 +185,9 @@ def test_workouts_read_belongs_only_to_user(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
     jwt_header = test_util.create_jwt_header(auth_response.data)
 
-    fail_response = test_client.get('/user/2/workout/1', headers = jwt_header)
+    fail_response = test_client.get('/user/2/workouts', headers = jwt_header)
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
-
 
 def test_workout_create_auth_limited(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
@@ -242,6 +249,26 @@ def test_workout_update_auth_limited(test_client, init_database):
     assert b"climbs" in success_response.data
     assert success_response.json['climbs'][2]['grade'] == 14
 
+def test_workout_update_user_cannot_update_anothers_workout(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.get('/user/3/workout/1',
+        headers = jwt_header,
+        json = {
+            'date': datetime.timestamp(datetime.now()),
+            'climbs': [
+                {'grade': 9, 'id': 3, 'letter_grade': None, 'type': 'boulder', 'user_id': 2, 'workout': 2},
+                {'grade': 10, 'id': 4, 'letter_grade': None, 'type': 'boulder', 'user_id': 2, 'workout': 2},
+                {'grade': 14, 'id': 5, 'letter_grade': None, 'type': 'boulder', 'user_id': 2, 'workout': 2},
+                {'grade': 12, 'id': 6, 'letter_grade': 'a', 'type': 'route', 'user_id': 2, 'workout': 2},
+                {'grade': 11, 'id': 7, 'letter_grade': 'a', 'type': 'route', 'user_id': 2, 'workout': 2}
+            ]
+        }
+    )
+    assert fail_response.status_code == 400
+    assert b"There was a problem fetching the workout" in fail_response.data
+
 def test_workout_update_belongs_only_to_user(test_client, init_database):
     #make sure only the user that owns the workout can update it
     auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
@@ -287,6 +314,14 @@ def test_workout_delete_belongs_only_to_user(test_client, init_database):
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
 
+def test_workout_delete_user_cannot_delete_anothers_workout(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.delete('/user/3/workout/1', headers = jwt_header)
+    assert fail_response.status_code == 400
+    assert b"There was a problem fetching the workout" in fail_response.data
+
 ###### /climbs ######################
 
 def test_climb_read_auth_limited(test_client, init_database):
@@ -311,6 +346,14 @@ def test_climb_read_belongs_only_to_user(test_client, init_database):
     fail_response = test_client.get('/user/2/workout/1', headers = jwt_header)
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
+
+def test_climb_read_user_cannot_read_anothers_climb(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.get('/user/3/climb/1', headers = jwt_header)
+    assert fail_response.status_code == 400
+    assert b"There was a problem fetching the climb" in fail_response.data
 
 
 def test_climb_create_auth_limited(test_client, init_database):
@@ -342,6 +385,24 @@ def test_climb_create_auth_limited(test_client, init_database):
     workouts_response = test_client.get('/user/2/workout/1', headers = jwt_header)
     assert workouts_response.status_code == 200
     assert len(workouts_response.json['climbs']) == num_climbs + 1
+
+def test_climb_create_belongs_only_to_user(test_client, init_database):
+    #make sure only the user that owns the climb can view it
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.post(
+        '/user/2/climbs',
+        headers = jwt_header,
+        json = {
+            "type": "boulder",
+            "grade": 5,
+            "user_id": 2,
+            "workout_id": 1
+        }
+    )
+    assert fail_response.status_code == 403
+
 
 def test_climb_update_auth_limited(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
@@ -382,14 +443,28 @@ def test_climb_update_belongs_only_to_user(test_client, init_database):
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
 
+def test_climb_update_user_cannot_update_anothers_climb(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.put('/user/3/climb/1',
+        headers = jwt_header,
+        json = {
+            "type": "boulder",
+            "grade": 5,
+            "user_id": 2,
+            "workout_id": 1
+        }
+    )
+    assert fail_response.status_code == 400
+    assert b"There was an error updating the climb" in fail_response.data
+
 def test_climb_delete_auth_limited(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
     jwt_header = test_util.create_jwt_header(auth_response.data)
 
-    #request fails without jwt
-    fail_response = test_client.delete('/user/2/climb/1')
+    fail_response = test_client.delete('/user/3/climb/1')
     assert fail_response.status_code == 401
-    assert b"Missing Authorization Header" in fail_response.data
 
     workouts_response = test_client.get('/user/2/workout/1', headers = jwt_header)
     assert workouts_response.status_code == 200
@@ -412,3 +487,11 @@ def test_climb_delete_belongs_only_to_user(test_client, init_database):
     fail_response = test_client.delete('/user/2/climb/1', headers=jwt_header)
     assert fail_response.status_code == 403
     assert b"Not Authorized" in fail_response.data
+
+def test_climb_delete_user_cannot_delete_anothers_climb(test_client, init_database):
+    auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)
+    jwt_header = test_util.create_jwt_header(auth_response.data)
+
+    fail_response = test_client.delete('/user/3/climb/1', headers = jwt_header)
+    assert fail_response.status_code == 400
+    assert b"There was a problem fetching the climb" in fail_response.data
