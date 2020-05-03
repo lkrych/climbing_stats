@@ -35,7 +35,7 @@ export default ({setLoggedIn}) => {
                     setError(json.description);
                 } else {
                     setError('');
-                    sessionStorage.setItem('jwt', json.access_token);
+                    localStorage.setItem('jwt', json.access_token);
                     setLoggedIn(true);
                     history.push("/dashboard");
                 }
