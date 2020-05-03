@@ -114,7 +114,6 @@ def create_workout(user_id, req_json):
 
 def update_workout(user_id, workout_id, req_json):
     workout = get_workout(workout_id)
-    print("before: {}".format(workout.to_json()))
     workout.date = req_json.get('date', workout.date)
 
     try:
@@ -131,7 +130,7 @@ def update_workout(user_id, workout_id, req_json):
         workout = get_workout(workout_id)
     except Exception as e:
         print(str(e))
-        
+
     return workout
 
 def delete_workout(workout_id):
