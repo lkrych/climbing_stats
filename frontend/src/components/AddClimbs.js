@@ -19,10 +19,15 @@ export default ({boulders, setBoulders, routes, setRoutes}) => {
     return(
         <Fragment>
             <p>
-                Boulders: {boulders.map(b => `V${b.grade}`)}
+                Boulders: {boulders.map(b => `V${b.grade} `)}
             </p>
             <p>
-                Routes: {routes.map(r => `5.${r.grade}${r.letterGrade}`)}
+                Routes: {routes.map(r => {
+                    if (r.letterGrade) {
+                        return `5.${r.grade}${r.letterGrade} `;
+                    } 
+                    return `5.${r.grade}`;
+                })}
             </p>
             <br></br>
             <button onClick={(e) => toggleBoulderForm(e)}>
