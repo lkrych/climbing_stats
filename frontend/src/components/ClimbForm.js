@@ -1,12 +1,10 @@
 import React, { useState, Fragment } from "react";
 
-import { range } from "../util/util";
-import AddClimbs from "./AddClimbs";
+import { range, rangeWithChars } from "../util/util";
 
 export default ({type, addClimb, climbs}) => {
     const [boulderSelection, setBoulderSelection] = useState(null);
     const [routeSelection, setRouteSelection] = useState(null);
-    const [letterGradeSelection, setLetterGradeSelection] = useState(null);
 
     const createRangeButtonList = (range = [], buttonInput, clickFunction) => {
         return range.map((n) => <button key={n} onClick={(e) => clickFunction(e, n)}>{buttonInput}{n}</button>, range)
@@ -14,12 +12,7 @@ export default ({type, addClimb, climbs}) => {
 
     const addBoulder = (e, grade) => {
         e.preventDefault();
-        addClimb(...climbs, grade)
-    }
-
-    const addRoute = (e, grade) => {
-        e.preventDefault();
-        addClimb(...climbs, `${grade}${letterGradeSelection}`);
+        addClimb(climbs => [...climbs, { 'grade': grade }])
     }
 
     const boulderSelectionChoices = {
@@ -34,25 +27,38 @@ export default ({type, addClimb, climbs}) => {
         <button key={"V11-V16"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V11-V16")}}>V11-V16</button>
     ];
 
-    const routeSelectionChoices = {
-        "5.0-5.9": createRangeButtonList(range(9, 0), '5.', addRoute),
-        "5.10-5.12": createRangeButtonList(range(3, 10), '5.', addRoute),
-        "5.13-5.15": createRangeButtonList(range(3, 13), '5.', addRoute),
-    }
-
     const routeRangeChoices = [
         <button key={"5.0-5.9"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.0-5.9")}}>5.0-5.9</button>,
-        <button key={"5.10-5.12"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.12")}}>5.10-5.12</button>,
-        <button key={"5.13-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.13-5.15")}}>5.13-5.15</button>
+        <button key={"5.10-5.11"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.11")}}>5.10-5.11</button>,
+        <button key={"5.12-5.13"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.12-5.13")}}>5.12-5.13</button>,
+        <button key={"5.14-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.14-5.15")}}>5.14-5.15</button>
     ];
 
-    const letterGradeSelectionChoices = [
-        <button key={"a"} onClick={(e) => { e.preventDefault(); setRouteSelection("a")}}>a</button>,
-        <button key={"b"} onClick={(e) => { e.preventDefault(); setRouteSelection("b")}}>b</button>,
-        <button key={"c"} onClick={(e) => { e.preventDefault(); setRouteSelection("c")}}>c</button>,
-        <button key={"d"} onClick={(e) => { e.preventDefault(); setRouteSelection("d")}}>d</button>
-    ]
+    const letterGrades = ['a','b','c','d'];
+    
+    const addRoute = (e, grade) => {
+        e.preventDefault();
 
+        let numberGrade = null;
+        let letterGrade = null;
+        if( typeof(grade) == 'string') {
+            let letterSplit = grade.split(/([abcd])/);
+            if (letterSplit.length > 1) {
+                numberGrade = letterSplit[0];
+                letterGrade = letterSplit[1];
+            }
+        } else { // for 5.0-5.9
+            numberGrade = grade;
+        }
+       
+        addClimb(climbs => [...climbs, { 'grade': numberGrade, 'letterGrade': letterGrade }]);
+    }
+    const routeSelectionChoices = {
+        "5.0-5.9": createRangeButtonList(range(10, 0), '5.', addRoute),
+        "5.10-5.11": createRangeButtonList(rangeWithChars(2, 10, letterGrades), '5.', addRoute),
+        "5.12-5.13": createRangeButtonList(rangeWithChars(2, 12, letterGrades), '5.', addRoute),
+        "5.14-5.15": createRangeButtonList(rangeWithChars(2, 14, letterGrades), '5.', addRoute),
+    }
 
 
     return(
@@ -62,8 +68,6 @@ export default ({type, addClimb, climbs}) => {
             <br></br>
             { boulderSelection ? boulderSelectionChoices[boulderSelection] : null }
             { routeSelection ? routeSelectionChoices[routeSelection] : null}
-            <br></br>
-            { routeSelection && routeSelection != "5.0-5.9" ? letterGradeSelectionChoices : null}
         </Fragment>
     );
 }
