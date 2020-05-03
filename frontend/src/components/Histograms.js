@@ -11,6 +11,8 @@ export default () => {
         }
     }, [data, d3Container.current])
 
+    //adapted from the following tutorials: https://observablehq.com/@d3/horizontal-bar-chart#data
+    // https://codepen.io/tfaramar/pen/qBOVbQO?editors=1010
     const drawBarChart = (data) => {
         const barHeight = 20;
         const margin = ({ top: 30, right: 30, bottom: 30, left: 30 });
