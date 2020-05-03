@@ -8,8 +8,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "d3": "^5.15.1",
+    "d3": "^5.16.0",
+    "jwt-decode": "^2.2.0",
     "react": "^16.13.0",
+    "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2"
   },

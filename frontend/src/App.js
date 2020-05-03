@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Splash from "./components/Splash";
 import Dashboard from "./components/Dashboard";
+import WorkoutForm from './components/WorkoutForm';
 
 export default () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,9 @@ export default () => {
         </Route>
         <Route exact path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route exact path="/workout/create">
+          <WorkoutForm />
         </Route>
       </Switch>
     </BrowserRouter>

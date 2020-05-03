@@ -1,16 +1,10 @@
 FLASK_APP := climbing_stats_backend
 
-start-dev:
+backend-dev:
 	FLASK_APP=${FLASK_APP} \
 	FLASK_ENV=development \
 	SECRET_KEY=$(SECRET_KEY) \
 	python3 -m flask run --host=0.0.0.0
-
-start-local:
-	FLASK_APP=${FLASK_APP} \
-	FLASK_ENV=development \
-	SECRET_KEY=$(SECRET_KEY) \
-	python3 -m flask run 
 
 frontend-dev:
 	cd frontend && npm start

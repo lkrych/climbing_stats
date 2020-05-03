@@ -1,5 +1,59 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default () => (
-    <button>Workout form coming here</button>
-);
+import AddClimbs from "./AddClimbs";
+import { postRequest } from '../util/request';
+import { getUserId } from '../util/jwt';
+
+export default () => {
+    const [date, setDate] = useState(new Date());
+    const [boulders, setBoulders] = useState([]);
+    const [routes, setRoutes] = useState([]);
+
+    const handleDateChange = date => {
+        setDate(date)
+    };
+
+    const submitWorkout = (e) => {
+        e.preventDefault();
+        const userId = getUserId();
+        postRequest(`/user/${userId}/workouts`,
+                {
+                    date,
+                    boulders,
+                    climbs
+                }
+            ).then((json) => {
+                console.log(json);
+                if (json.status_code == 200) {
+                    
+                } else {
+                    
+                }
+            });
+    }
+
+    
+
+    return (
+        <Fragment>
+            <h2>Enter your climbs</h2>
+            <form onSubmit={(e) => submitWorkout(e)}>
+                <label>Date: </label>
+                <DatePicker
+                    selected={date}
+                    onChange={(e) => handleDateChange(e)}
+                />
+                <AddClimbs
+                    boulders={boulders}
+                    setBoulders={setBoulders}
+                    routes={routes}
+                    setRoutes={setRoutes}
+                />
+                <br />
+                
+            </form>
+        </Fragment>  
+    )
+};

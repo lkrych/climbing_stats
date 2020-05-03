@@ -14,4 +14,4 @@ RUN pip3 install -r requirements.txt
 COPY . /climbing_stats
 
 
-CMD ["make", "start-dev"]
+CMD ["make", "backend-dev"]
