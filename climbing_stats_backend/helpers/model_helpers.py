@@ -20,12 +20,6 @@ def get_user_by_username_or_email(username_or_email):
         print(e)
         return None
 
-def check_if_user_exists(user_id):
-    if get_user(user_id):
-        return True
-    else:
-        return False
-
 def create_user(req_json):
     new_user = Users(
         username = req_json['username'],
@@ -71,12 +65,23 @@ def grade_and_letter(g):
     letter = g[2:]
     return grade, letter
 
-def get_workout(workout_id):
-    workout = db.session.query(Workouts).get(workout_id)
-    if workout:
-        return workout
+def get_workout(user_id, workout_id):
+    try:
+        workout = db.session.query(Workouts).filter((Workouts.id == workout_id) & (Workouts.user_id == user_id)).one()
+    except Exception as e:
+        print(str(e))
+        raise Exception("There was a problem fetching the workout".format(workout_id))
+        return None
+    return workout
+
+def get_all_workouts(from_timestamp, to_timestamp):
+    workouts = db.session.query(Workouts).filter(
+        Workouts.date.between(from_timestamp, to_timestamp)
+    ).all()
+    if workouts:
+        return workouts
     else:
-        raise Exception("Workout: {} doesn't exist".format(workout_id))
+        raise Exception("Workouts don't exist in that timeframe")
 
 def create_workout(user_id, req_json):
     new_workout = Workouts(
@@ -109,29 +114,48 @@ def create_workout(user_id, req_json):
     db.session.commit()
     return new_workout
 
-def update_workout(workout_id, req_json):
-    workout = get_workout(workout_id)
-    for key, val in req_json.items():
-        setattr(workout, key, val)
-    db.session.commit()
+def update_workout(user_id, workout_id, req_json):
+    workout = get_workout(user_id, workout_id)
+    workout.date = req_json.get('date', workout.date)
+
+    try:
+        for climb in req_json['climbs']:
+            climb_json = {
+                "type": climb.get('type', None),
+                "grade": climb.get('grade', None),
+                "letter_grade": climb.get('letter_grade', None),
+                "user_id": climb.get('user_id', None),
+                "workout_id": workout_id
+            }
+            update_climb(user_id, climb['id'], climb_json)
+        db.session.commit()
+        workout = get_workout(user_id, workout_id)
+    except Exception as e:
+        print(str(e))
+
     return workout
 
-def delete_workout(workout_id):
-    workout = get_workout(workout_id)
+def delete_workout(user_id, workout_id):
+    workout = get_workout(user_id, workout_id)
     db.session.delete(workout)
     db.session.commit()
     return workout
 
 ### CLIMB HELPER METHODS ########
 
-def get_climb(climb_id):
-    climb = db.session.query(Climbs).get(climb_id)
-    if climb:
-        return climb
-    else:
-        raise Exception("Climb: {} doesn't exist".format(climb_id))
+def get_climb(user_id, climb_id):
+    try:
+        climb = db.session.query(Climbs).filter((Climbs.id == climb_id) & (Climbs.user_id == user_id)).one()
+    except Exception as e:
+        print(str(e))
+        raise Exception("There was a problem fetching the climb".format(climb_id))
+        return None
+    return climb
 
-def create_climb(req_json):
+def create_climb(user_id, req_json):
+    if int(req_json['user_id']) != int(user_id):
+        raise Exception("There was a problem creating the climb")
+
     new_climb = {}
     if req_json['type'] == 'boulder':
         check_valid_grade(0, req_json['grade'])
@@ -158,15 +182,19 @@ def create_climb(req_json):
     db.session.commit()
     return new_climb
 
-def update_climb(climb_id, req_json):
-    climb = get_climb(climb_id)
+def update_climb(user_id, climb_id, req_json):
+
+    if int(req_json['user_id']) != int(user_id):
+        raise Exception("There was an error updating the climb")
+    
+    climb = get_climb(user_id, climb_id)
     for key, val in req_json.items():
         setattr(climb, key, val)
     db.session.commit()
     return climb
 
-def delete_climb(climb_id):
-    climb = get_climb(climb_id)
+def delete_climb(user_id, climb_id):
+    climb = get_climb(user_id, climb_id)
     db.session.delete(climb)
     db.session.commit()
     return climb

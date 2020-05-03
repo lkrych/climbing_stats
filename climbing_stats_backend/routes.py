@@ -3,7 +3,9 @@ from flask_jwt_extended import jwt_required, create_access_token
 
 from climbing_stats_backend.helpers import auth_helpers 
 from climbing_stats_backend.helpers import model_helpers
-from climbing_stats_backend.helpers import factory_helpers 
+from climbing_stats_backend.helpers import factory_helpers
+from climbing_stats_backend.helpers import util_helpers
+
 route_blueprint = Blueprint('route_blueprint', __name__)
 
 @route_blueprint.route('/', methods=['GET'])
@@ -48,7 +50,7 @@ def get_user(user_id):
         return user.to_json()
     except Exception as e:
         print(e)
-        return jsonify({"message": str(e)}), 400
+        return jsonify({"msg": str(e)}), 400
 
 @route_blueprint.route('/user/<user_id>', methods=['PUT', 'PATCH'])
 @auth_helpers.authorize
@@ -67,151 +69,105 @@ def delete_user(user_id):
 @route_blueprint.route('/user/<user_id>/workouts', methods=['POST'])
 @auth_helpers.authorize
 def create_workout(user_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            workout = model_helpers.create_workout(user_id, request.get_json())
-            return workout.to_json()
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        workout = model_helpers.create_workout(user_id, request.get_json())
+        return workout.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+    
 
 @route_blueprint.route('/user/<user_id>/workouts', methods=['GET'])
 @auth_helpers.authorize
 def get_all_workouts(user_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climbs = model_helpers.get_all_workouts()
-            return jsonify ({ "workouts": workouts }), 200
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    date_filter = request.args.get('dateFilter')
+    from_timestamp, to_timestamp = util_helpers.get_query_timestamps(date_filter)
+    try:
+        workouts = model_helpers.get_all_workouts(from_timestamp, to_timestamp)
+        workouts = map(lambda w: w.to_json(), workouts)
+        return jsonify ({ "workouts": list(workouts) }), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+    
 
 @route_blueprint.route('/user/<user_id>/workout/<workout_id>')
 @auth_helpers.authorize
 def get_workout(user_id, workout_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            workout = model_helpers.get_workout(workout_id)
-            return workout.to_json()
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        workout = model_helpers.get_workout(user_id, workout_id)
+        return workout.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+
 
 @route_blueprint.route('/user/<user_id>/workout/<workout_id>', methods=['PUT', 'PATCH'])
 @auth_helpers.authorize
 def update_workout(user_id, workout_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            workout = model_helpers.update_workout(workout_id, request.get_json())
-            return workout.to_json()
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        workout = model_helpers.update_workout(user_id, workout_id, request.get_json())
+        return workout.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+    
 
 @route_blueprint.route('/user/<user_id>/workout/<workout_id>', methods=['DELETE'])
 @auth_helpers.authorize
 def delete_workout(user_id, workout_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            workout = model_helpers.delete_workout(workout_id)
-            return jsonify({"workout_id": workout.id})
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        workout = model_helpers.delete_workout(user_id, workout_id)
+        return jsonify({"workout_id": workout.id})
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+
 
 ### CLIMBS ROUTES ###########
 
 @route_blueprint.route('/user/<user_id>/climbs', methods=['POST'])
 @auth_helpers.authorize
 def create_climb(user_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climb = model_helpers.create_climb(request.get_json())
-            return climb.to_json()
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        climb = model_helpers.create_climb(user_id, request.get_json())
+        return climb.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+
 
 @route_blueprint.route('/user/<user_id>/climb/<climb_id>')
 @auth_helpers.authorize
 def get_climb(user_id, climb_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climb = model_helpers.get_climb(climb_id)
-            return climb.to_json()
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    try:
+        climb = model_helpers.get_climb(user_id, climb_id)
+        return climb.to_json()
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400
+    
 
-@route_blueprint.route('/user/<user_id>/climbs', methods=['GET'])
-@auth_helpers.authorize
-def get_all_climbs(user_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climbs = model_helpers.get_all_climbs()
-            return jsonify ({ "climbs": climbs }), 200
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
 
 @route_blueprint.route('/user/<user_id>/climb/<climb_id>', methods=['PUT', 'PATCH'])
 @auth_helpers.authorize
 def update_climb(user_id, climb_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climb = model_helpers.update_climb(climb_id, request.get_json())
-            return climb.to_json()
-        except Exception as e:
-                print(e)
-                return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+    
+    try:
+        climb = model_helpers.update_climb(user_id, climb_id, request.get_json())
+        return climb.to_json()
+    except Exception as e:
+            print(e)
+            return jsonify({"msg": str(e)}), 400
+
 
 @route_blueprint.route('/user/<user_id>/climb/<climb_id>', methods=['DELETE'])
 @auth_helpers.authorize
 def delete_climb(user_id, climb_id):
-    user_exists = model_helpers.check_if_user_exists(user_id)
-    if user_exists:
-        try:
-            climb = model_helpers.delete_climb(climb_id)
-            return jsonify({"climb_id": climb.id})
-        except Exception as e:
-            print(e)
-            return jsonify({"message": str(e)}), 400
-    else:
-        model_helpers.user_dne_exception()
-        return jsonify(), 400
+
+    try:
+        climb = model_helpers.delete_climb(user_id, climb_id)
+        return jsonify({"climb_id": climb.id})
+    except Exception as e:
+        print(e)
+        return jsonify({"msg": str(e)}), 400

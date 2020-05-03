@@ -54,6 +54,7 @@ climbing_stats/
           ├── factory_helpers.py          <--- Initalizes DB and Bcrypt 
           ├── model_helpers.py            <--- Helper Methods for the Models (users, workouts, climbs)
           ├── seeds.py                    <--- Definition of Flask utility methods for resetting and seeding the DB
+          ├── util_helpers.py             <--- General Helper Methods 
       ├── models/                     <--- Directory of ORM Classes
           ├── climb.py                    
           ├── user.py                     

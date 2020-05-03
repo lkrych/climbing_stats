@@ -9,8 +9,6 @@ def authorize(fn):
     def wrapper(*args, **kwargs):
         verify_jwt_in_request()
         identity = get_jwt_identity()
-        print(identity)
-        print(kwargs)
 
         if int(kwargs['user_id']) != int(identity['id']):
             return jsonify({'msg': 'Not Authorized!'}), 403

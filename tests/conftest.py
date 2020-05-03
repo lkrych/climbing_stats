@@ -1,3 +1,4 @@
+from datetime import datetime
 import pytest
 
 from climbing_stats_backend import create_app
@@ -47,7 +48,7 @@ def init_database():
     db.session.add(user4)
 
     workout1 = Workouts(
-        date = "1578204182.000337",
+        date = datetime.timestamp(datetime.now()),
         user_id = 2
     )
     climb1 = Climbs(

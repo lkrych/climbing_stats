@@ -14,7 +14,6 @@ def seed_db(users = 1, workouts = 50):
     """Seed Database"""
     for user in range(users):
         u = create_user()
-        print("User: {}".format(u.id))
         for workout in range(workouts):
             create_workout(u.id)
 

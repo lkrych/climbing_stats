@@ -26,6 +26,6 @@ class Climbs(db.Model):
             "type": self.type_of_climb(self.type),
             "grade": self.grade,
             "letter_grade": self.letter_grade,
-            "user": self.user_id,
+            "user_id": self.user_id,
             "workout": self.workout_id
         }
