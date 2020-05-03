@@ -7,11 +7,10 @@ export const getRequest = (route) => {
             'Access-Control-Allow-Origin': '*',
             'Authorization': `Bearer ${sessionStorage.getItem('jwt')}`,
         }
-    }
-        )
-        .then((response) => {
-            return response.json();
-        })
+    })
+    .then((response) => {
+        return response.json();
+    })
 }
 
 export const postRequest = (route, data) => {
