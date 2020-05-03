@@ -20,12 +20,6 @@ def get_user_by_username_or_email(username_or_email):
         print(e)
         return None
 
-def check_if_user_exists(user_id):
-    if get_user(user_id):
-        return True
-    else:
-        return False
-
 def create_user(req_json):
     new_user = Users(
         username = req_json['username'],
@@ -78,6 +72,15 @@ def get_workout(workout_id):
     else:
         raise Exception("Workout: {} doesn't exist".format(workout_id))
 
+def get_all_workouts(from_timestamp, to_timestamp):
+    workouts = db.session.query(Workouts).filter(
+        Workouts.date.between(from_timestamp, to_timestamp)
+    ).all()
+    if workouts:
+        return workouts
+    else:
+        raise Exception("Workouts don't exist in that timeframe")
+
 def create_workout(user_id, req_json):
     new_workout = Workouts(
         date = req_json['date'],
@@ -109,11 +112,26 @@ def create_workout(user_id, req_json):
     db.session.commit()
     return new_workout
 
-def update_workout(workout_id, req_json):
+def update_workout(user_id, workout_id, req_json):
     workout = get_workout(workout_id)
-    for key, val in req_json.items():
-        setattr(workout, key, val)
-    db.session.commit()
+    print("before: {}".format(workout.to_json()))
+    workout.date = req_json.get('date', workout.date)
+
+    try:
+        for climb in req_json['climbs']:
+            climb_json = {
+                "type": climb.get('type', None),
+                "grade": climb.get('grade', None),
+                "letter_grade": climb.get('letter_grade', None),
+                "user_id": climb.get('user_id', None),
+                "workout_id": workout_id
+            }
+            update_climb(user_id, climb['id'], climb_json)
+        db.session.commit()
+        workout = get_workout(workout_id)
+    except Exception as e:
+        print(str(e))
+        
     return workout
 
 def delete_workout(workout_id):
@@ -131,7 +149,10 @@ def get_climb(climb_id):
     else:
         raise Exception("Climb: {} doesn't exist".format(climb_id))
 
-def create_climb(req_json):
+def create_climb(user_id, req_json):
+    if int(req_json['user_id']) != int(user_id):
+        raise Exception("You cannot create a climb for someone else")
+
     new_climb = {}
     if req_json['type'] == 'boulder':
         check_valid_grade(0, req_json['grade'])
@@ -158,7 +179,11 @@ def create_climb(req_json):
     db.session.commit()
     return new_climb
 
-def update_climb(climb_id, req_json):
+def update_climb(user_id, climb_id, req_json):
+
+    if int(req_json['user_id']) != int(user_id):
+        raise Exception("You cannot update someone else's climb")
+    
     climb = get_climb(climb_id)
     for key, val in req_json.items():
         setattr(climb, key, val)
