@@ -4,8 +4,10 @@ import * as d3 from "d3";
 export default () => {
     const leftContainer = useRef(null);
     const rightContainer = useRef(null); //useRef hook creates a variable that holds on to a value throughout rendering
+    
     const routeData = [{ grade: "9", value: 2 }, { grade: "10a", value: 3 }, { grade: "10b", value: 4 }, { grade: "10c", value: 6 }, { grade: "10d", value: 3 }, { grade: "11a", value: 2 }, { grade: "11b", value: 3 }, { grade: "11c", value: 2 }, { grade: "11d", value: 1 }, { grade: "12a", value: 1 }];
     const boulderData = [{ grade: "V3", value: 6 }, { grade: "V4", value: 3 }, { grade: "V5", value: 4 }, { grade: "V6", value: 2 }];
+    // const boulderData = [];
 
     useEffect(() => {
         if (routeData && rightContainer.current) {   
@@ -27,15 +29,15 @@ export default () => {
         "11b": "#FF5733",
         "11c": "#FF5733",
         "11d": "#FF5733",
-        "12a": "#C70039"
+        "12a": "#C70039",
+        "V3": "green"
     };
 
     //adapted from the following tutorials: https://observablehq.com/@d3/horizontal-bar-chart#data
     // https://codepen.io/tfaramar/pen/qBOVbQO?editors=1010
     const drawLeftChart = (data) => {
-        console.log(data);
         const barHeight = 20;
-        const margin = ({ top: 10, right: 1, bottom: 30, left: 20 });
+        const margin = ({ top: 10, right: 5, bottom: 30, left: 20 });
         const height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
         const width = 500;
 
@@ -54,15 +56,15 @@ export default () => {
             .call(g => g.select(".domain").remove()); //removes tick line
 
         const yAxis = g => g
-            .attr("transform", `translate(${margin.left}, 0)`)
-            .call(d3.axisRight(y).tickFormat(i => data[i].grade).tickSize(0))
+            .attr("transform", `translate(${width - margin.right}, 0)`)
+            .call(d3.axisLeft(y).tickFormat(i => data[i].grade).tickSize(0))
             .call(g => g.select(".domain").remove()); 
 
         const boulderChart = d3.select(leftContainer.current)
             .append("svg")
             .attr("width", width)
             .attr("viewBox", [0, 0, width, height])
-            .style("border", "1px solid red");
+            // .style("border", "1px solid red");
 
         boulderChart.append("g")
             .selectAll("rect")
@@ -81,13 +83,12 @@ export default () => {
             .call(yAxis)
             .attr("font-family", "sans-serif"); //font style for y-axis grades
 
-        console.log(boulderChart.node());
         return boulderChart.node();
     }
 
     const drawRightChart = (data) => {
         const barHeight = 20;
-        const margin = ({ top: 10, right: 20, bottom: 30, left: 1 });
+        const margin = ({ top: 10, right: 20, bottom: 30, left: 5 });
         const height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
         const width = 500;
       
@@ -114,7 +115,7 @@ export default () => {
             .append("svg")
             .attr("width", width)
             .attr("viewBox", [0, 0, width, height])
-            .style("border", "1px solid red");
+            // .style("border", "1px solid red");
 
         routeChart.append("g")
             .selectAll("rect")
@@ -133,7 +134,6 @@ export default () => {
             .call(yAxis)
             .attr("font-family", "sans-serif"); //font style for y-axis grades
 
-        console.log(routeChart.node());
         return routeChart.node();
     }
 
