@@ -204,7 +204,7 @@ def test_workout_create_auth_limited(test_client, init_database):
         headers = jwt_header,
         json = {
             "date": 1578702677,
-            "boulder": [9, 10, 11],
+            "boulders": [9, 10, 11],
             "routes": ['12a', '11a']
         }
     )
