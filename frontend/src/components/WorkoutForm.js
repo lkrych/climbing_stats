@@ -15,6 +15,19 @@ export default () => {
         setDate(date)
     };
 
+    const removeFromArray = (e, type, index) => {
+        e.preventDefault();
+        if (type == "route") {
+            const copyRoutes = [...routes]
+            copyRoutes.splice(index, 1)
+            setRoutes(copyRoutes)
+        } else {
+            const copyBoulders = [...boulders]
+            copyBoulders.splice(index, 1)
+            setBoulders(copyBoulders)
+        }
+    }
+
     const submitWorkout = (e) => {
         e.preventDefault();
         const userId = getUserId();
@@ -50,6 +63,7 @@ export default () => {
                     setBoulders={setBoulders}
                     routes={routes}
                     setRoutes={setRoutes}
+                    removeFromArray={removeFromArray}
                 />
                 <br />
                 
