@@ -10,26 +10,43 @@ export default () => {
     const [date, setDate] = useState(new Date());
     const [boulders, setBoulders] = useState([]);
     const [routes, setRoutes] = useState([]);
+    const [message, setMessage] = useState('');
 
     const handleDateChange = date => {
         setDate(date)
     };
+
+    const removeFromArray = (e, type, index) => {
+        e.preventDefault();
+        if (type == "route") {
+            const copyRoutes = [...routes]
+            copyRoutes.splice(index, 1)
+            setRoutes(copyRoutes)
+        } else {
+            const copyBoulders = [...boulders]
+            copyBoulders.splice(index, 1)
+            setBoulders(copyBoulders)
+        }
+    }
 
     const submitWorkout = (e) => {
         e.preventDefault();
         const userId = getUserId();
         postRequest(`/user/${userId}/workouts`,
                 {
-                    date,
+                    date: date.getTime() / 1000, //for proper timestamp
                     boulders,
-                    climbs
+                    routes
                 }
             ).then((json) => {
                 console.log(json);
                 if (json.status_code == 200) {
-                    
+                    setBoulders([]);
+                    setRoutes([]);
+                    setMessage('Your workout was added!')
+                    setDate(new Date())
                 } else {
-                    
+                    setMessage(json.msg);
                 }
             });
     }
@@ -38,6 +55,7 @@ export default () => {
 
     return (
         <Fragment>
+            { message ? <div>{message}</div> : null }
             <h2>Enter your climbs</h2>
             <form onSubmit={(e) => submitWorkout(e)}>
                 <label>Date: </label>
@@ -50,9 +68,10 @@ export default () => {
                     setBoulders={setBoulders}
                     routes={routes}
                     setRoutes={setRoutes}
+                    removeFromArray={removeFromArray}
                 />
                 <br />
-                
+                <button type="submit"> Enter Workout </button>
             </form>
         </Fragment>  
     )

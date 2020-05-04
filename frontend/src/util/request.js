@@ -26,7 +26,12 @@ export const postRequest = (route, data) => {
             'Content-Type': 'application/json',
 
           },
-    }).then((response) => {
-            return response.json();
     })
+    .then(handleResponse)
+    .then(json => json)
+}
+
+const handleResponse = (response) => {
+    return response.json()
+        .then(json => Object.assign({}, json, { 'status_code': response.status }))
 }

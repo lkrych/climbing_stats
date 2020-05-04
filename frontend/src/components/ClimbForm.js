@@ -10,15 +10,15 @@ export default ({type, addClimb, climbs}) => {
         return range.map((n) => <button key={n} onClick={(e) => clickFunction(e, n)}>{buttonInput}{n}</button>, range)
     }
 
-    const addBoulder = (e, grade) => {
+    const addBoulderOrRoute = (e, grade) => {
         e.preventDefault();
-        addClimb(climbs => [...climbs, { 'grade': grade }])
+        addClimb(climbs => [...climbs, grade])
     }
 
     const boulderSelectionChoices = {
-        "V0-V5": createRangeButtonList(range(6, 0), 'V', addBoulder),
-        "V6-V10": createRangeButtonList(range(5, 6), 'V', addBoulder),
-        "V11-V16": createRangeButtonList(range(6, 11), 'V', addBoulder),
+        "V0-V5": createRangeButtonList(range(6, 0), 'V', addBoulderOrRoute),
+        "V6-V10": createRangeButtonList(range(5, 6), 'V', addBoulderOrRoute),
+        "V11-V16": createRangeButtonList(range(6, 11), 'V', addBoulderOrRoute),
     }
 
     const boulderRangeChoices = [
@@ -36,28 +36,12 @@ export default ({type, addClimb, climbs}) => {
 
     const letterGrades = ['a','b','c','d'];
     
-    const addRoute = (e, grade) => {
-        e.preventDefault();
 
-        let numberGrade = null;
-        let letterGrade = null;
-        if( typeof(grade) == 'string') {
-            let letterSplit = grade.split(/([abcd])/);
-            if (letterSplit.length > 1) {
-                numberGrade = letterSplit[0];
-                letterGrade = letterSplit[1];
-            }
-        } else { // for 5.0-5.9
-            numberGrade = grade;
-        }
-       
-        addClimb(climbs => [...climbs, { 'grade': numberGrade, 'letterGrade': letterGrade }]);
-    }
     const routeSelectionChoices = {
-        "5.0-5.9": createRangeButtonList(range(10, 0), '5.', addRoute),
-        "5.10-5.11": createRangeButtonList(rangeWithChars(2, 10, letterGrades), '5.', addRoute),
-        "5.12-5.13": createRangeButtonList(rangeWithChars(2, 12, letterGrades), '5.', addRoute),
-        "5.14-5.15": createRangeButtonList(rangeWithChars(2, 14, letterGrades), '5.', addRoute),
+        "5.0-5.9": createRangeButtonList(range(10, 0), '5.', addBoulderOrRoute),
+        "5.10-5.11": createRangeButtonList(rangeWithChars(2, 10, letterGrades), '5.', addBoulderOrRoute),
+        "5.12-5.13": createRangeButtonList(rangeWithChars(2, 12, letterGrades), '5.', addBoulderOrRoute),
+        "5.14-5.15": createRangeButtonList(rangeWithChars(2, 14, letterGrades), '5.', addBoulderOrRoute),
     }
 
 

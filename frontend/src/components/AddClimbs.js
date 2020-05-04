@@ -1,8 +1,9 @@
 import React, { useState, Fragment } from "react";
 
 import ClimbForm from "./ClimbForm";
+import Climb from "./Climb";
 
-export default ({boulders, setBoulders, routes, setRoutes}) => {
+export default ({boulders, setBoulders, routes, setRoutes, removeFromArray}) => {
     const [showBoulderForm, setShowBoulderForm] = useState(false);
     const [showRouteForm, setShowRouteForm] = useState(false);
 
@@ -18,17 +19,12 @@ export default ({boulders, setBoulders, routes, setRoutes}) => {
 
     return(
         <Fragment>
-            <p>
-                Boulders: {boulders.map(b => `V${b.grade} `)}
-            </p>
-            <p>
-                Routes: {routes.map(r => {
-                    if (r.letterGrade) {
-                        return `5.${r.grade}${r.letterGrade} `;
-                    } 
-                    return `5.${r.grade}`;
-                })}
-            </p>
+            <div>
+                Boulders: {boulders.map((b, i) => <Climb key={i} type="boulder" grade={b} index={i} removeFromArray={removeFromArray} /> )}
+            </div>
+            <div>
+                Routes: {routes.map((r, i) => <Climb key={i} type="route" grade={r} index={i} removeFromArray={removeFromArray}/>)}
+            </div>
             <br></br>
             <button onClick={(e) => toggleBoulderForm(e)}>
                 Add Boulder

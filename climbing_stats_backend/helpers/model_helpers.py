@@ -88,8 +88,8 @@ def create_workout(user_id, req_json):
         date = req_json['date'],
         user_id = user_id
     )
-    if 'boulder' in req_json:
-        for b in req_json['boulder']:
+    if 'boulders' in req_json:
+        for b in req_json['boulders']:
             check_valid_grade(0, b)
             new_b = Climbs(
                 type = 0,
