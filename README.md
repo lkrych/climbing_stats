@@ -111,7 +111,7 @@ Workout should be created with a JSON-serialized object that looks like the obje
 ```json
 {
   "date": 1577865600,
-  "boulder": [5, 6],
+  "boulders": [5, 6],
   "routes": ["12d", "11a", "12c", "12c", "11c"]
 }
 ```
