@@ -27,5 +27,5 @@ class Climbs(db.Model):
             "grade": self.grade,
             "letter_grade": self.letter_grade,
             "user_id": self.user_id,
-            "workout": self.workout_id
+            "workout_id": self.workout_id
         }
