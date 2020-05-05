@@ -1,11 +1,11 @@
 from datetime import datetime
 
-def get_query_timestamps(filter="month"):
+def get_query_timestamps(filter):
     today = datetime.now()
     today_timestamp = datetime.timestamp(today)
     from_timestamp = ""
 
-    if filter == "month":
+    if filter == "month" or not filter:
         current_month = today.replace(day=1)
         from_timestamp = datetime.timestamp(current_month)
     elif filter == "year":
