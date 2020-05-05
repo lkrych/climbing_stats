@@ -10,7 +10,7 @@ import WorkoutForm from './components/WorkoutForm';
 
 export default () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
+  const [showSignup, setShowSignup] = useState(false); //need to set this as soon as login or signup endpoint is reached
 
   return (
     <BrowserRouter>
