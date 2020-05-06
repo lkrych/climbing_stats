@@ -195,7 +195,7 @@ def test_workout_create_auth_limited(test_client, init_database):
 
     #request fails without jwt
     fail_response = test_client.post('/user/2/workouts')
-    assert fail_response.status_code == 401
+    assert fail_response.status_code == 402
     assert b"Missing Authorization Header" in fail_response.data
 
     #requests succeeds with jwt
