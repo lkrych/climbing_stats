@@ -15,16 +15,16 @@
         * [ ] Log a workout (consisting of 1+ climbs) -> form
         * [ ] On login, see composite of climbing stats (last week, last month, last year)
 
-* [ ] Backend
-    * [ ] use a production-grade server in docker
+* [x] Backend
+    * [x] use a production-grade server in docker
 
 * [ ] Containerization and prepare for deployment
     * [X] Build Docker file
     * [ ] Terraform plan resources
 * [ ] CI/CD
-    * [ ] Backend Testing
+    * [x] Backend Testing
     * [ ] Frontend Testing
-    * [ ] CI with GitHub
+    * [x] CI with GitHub
 
 
 ## Nice to have (future hackathon)
