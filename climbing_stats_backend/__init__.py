@@ -7,17 +7,18 @@ from . import config
 
 #application factory function - http://flask.palletsprojects.com/en/1.1.x/tutorial/factory/
 # https://flask.palletsprojects.com/en/1.1.x/patterns/appfactories/
+environment = os.getenv('ENV')
 
-def create_app(environment='development'):
+def create_app(testing=False):
     #create and configure app
     app_instance = Flask(__name__)
-    if environment == 'prod':
+    if environment == 'production':
         app_instance.config.from_object(config.ProductionConfig())
     elif environment == 'stage':
         app_instance.config.from_object(config.StageConfig())
     elif environment == 'development':
         app_instance.config.from_object(config.DevelopmentConfig())
-    elif environment == 'testing':
+    elif testing:
         app_instance.config.from_object(config.TestingConfig())
 
     from climbing_stats_backend.helpers import factory_helpers
