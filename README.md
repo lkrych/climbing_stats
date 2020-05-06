@@ -14,7 +14,7 @@ Supports both bouldering workouts or sport climbing workouts.
 
 | Command       | Description   |
 | ------------- |-------------|
-| Local Development | ```make start-dev```| 
+| Local Development | ```make backend-dev```| 
 | Docker Development | ```make docker-dev``` |
 | Frontend Devleopment | ``` make frontend-dev ``` |
 | Run Tests | ``` make test``` |   
@@ -22,7 +22,7 @@ Supports both bouldering workouts or sport climbing workouts.
 
 ### Development work
 
-Setup dependencies
+Setup dependencies (built in to local development script)
 
 ```bash
 python -m venv climbing_stats_venv

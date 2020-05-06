@@ -12,7 +12,7 @@
     * [ ] User stories/features:
         * [x] Sign up for service
         * [x] Log in to/log out of service
-        * [ ] Log a workout (consisting of 1+ climbs) -> form
+        * [x] Log a workout (consisting of 1+ climbs) -> form
         * [ ] On login, see composite of climbing stats (last week, last month, last year)
 
 * [x] Backend
@@ -59,13 +59,14 @@
 * [x] Authentication of certain routes
     1. [x] JWT
     2. [x] Login
-    3. [ ] Only allow access to resources you own
+    3. [x] Only allow access to resources you own
 * [ ] Testing
     1. [ ] Unit tests
-    2. [ ] Functional Tests
         * [ ] Auth
         * [ ] User
         * [ ] Workouts
         * [ ] Climbs
+    2. [x] Functional Tests
+        
 
 

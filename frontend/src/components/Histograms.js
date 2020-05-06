@@ -7,7 +7,7 @@ export default () => {
     
     const routeData = [{ grade: "9", value: 2 }, { grade: "10a", value: 3 }, { grade: "10b", value: 4 }, { grade: "10c", value: 6 }, { grade: "10d", value: 3 }, { grade: "11a", value: 2 }, { grade: "11b", value: 3 }, { grade: "11c", value: 2 }, { grade: "11d", value: 1 }, { grade: "12a", value: 1 }];
     const boulderData = [{ grade: "V3", value: 6 }, { grade: "V4", value: 3 }, { grade: "V5", value: 4 }, { grade: "V6", value: 2 }];
-    // const boulderData = [];
+    // format routeData and boulderData as k/v pairs in histogram data passed in
 
     useEffect(() => {
         if (routeData && rightContainer.current) {   
