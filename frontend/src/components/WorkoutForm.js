@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button, Input, Label } from 'semantic-ui-react'
+
 
 import AddClimbs from "./AddClimbs";
 import { postRequest } from '../util/request';
@@ -58,7 +60,7 @@ export default () => {
             { message ? <div>{message}</div> : null }
             <h2>Enter your climbs</h2>
             <form onSubmit={(e) => submitWorkout(e)}>
-                <label>Date: </label>
+                <Label>Date: </Label>
                 <DatePicker
                     selected={date}
                     onChange={(e) => handleDateChange(e)}
@@ -71,7 +73,7 @@ export default () => {
                     removeFromArray={removeFromArray}
                 />
                 <br />
-                <button type="submit"> Enter Workout </button>
+                <Button type="submit"> Enter Workout </Button>
             </form>
         </Fragment>  
     )

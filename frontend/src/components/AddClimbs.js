@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { Button, Input, Label } from 'semantic-ui-react'
 
 import ClimbForm from "./ClimbForm";
 import Climb from "./Climb";
@@ -26,14 +27,14 @@ export default ({boulders, setBoulders, routes, setRoutes, removeFromArray}) => 
                 Routes: {routes.map((r, i) => <Climb key={i} type="route" grade={r} index={i} removeFromArray={removeFromArray}/>)}
             </div>
             <br></br>
-            <button onClick={(e) => toggleBoulderForm(e)}>
+            <Button onClick={(e) => toggleBoulderForm(e)}>
                 Add Boulder
-            </button>
+            </Button>
             {showBoulderForm ? <ClimbForm type="boulder" addClimb={setBoulders} climbs={boulders} /> : null}
             <br></br>
-            <button onClick={(e) => toggleRouteForm(e)}>
+            <Button onClick={(e) => toggleRouteForm(e)}>
                 Add Route
-            </button>
+            </Button>
             {showRouteForm ? <ClimbForm type="route" addClimb={setRoutes} climbs={routes} /> : null}
         </Fragment>
     );
