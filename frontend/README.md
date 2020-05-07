@@ -27,6 +27,8 @@ You can use CSS files with simple ES2015 `import` statements in your Javascript:
 import "./index.css";
 ```
 
+You can also import components using [Semantic UI](https://react.semantic-ui.com/)
+
 ## Babel transforms
 
 The Babel preset [babel-preset-nano-react-app](https://github.com/adrianmcli/babel-preset-nano-react-app) and a small amount of configuration is used to support the same transforms that Create React App supports.
