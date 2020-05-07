@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     let history = useHistory();
@@ -19,7 +20,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     };
 
     const addWorkoutLink = (<li>
-                            <button onClick={(e) => goToWorkout(e)}>Add Workout</button>
+                            <Button onClick={(e) => goToWorkout(e)}>Add Workout</Button>
                         </li>);
 
     if (loggedIn) {
@@ -28,7 +29,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
                 <NavLink to="/"><li onClick={() => setShowSignup(false)}>LOGO!</li></NavLink>
                 { location.pathname == "/workout/create" ? null : addWorkoutLink }
                 <li>
-                    <button onClick={(e) => logOut(e)}> Logout</button>
+                    <Button onClick={(e) => logOut(e)}> Logout</Button>
                 </li>
             </div>
         )
@@ -36,7 +37,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
         return (
             <div>
                 <NavLink to="/"><li onClick={() => setShowSignup(false)}>LOGO!</li></NavLink>
-                <NavLink to={showSignup ? "/signup" : "/login"}><button onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</button></NavLink>
+                <NavLink to={showSignup ? "/signup" : "/login"}><Button size='tiny' onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</Button></NavLink>
             </div>
         )
     }

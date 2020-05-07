@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button, Input, Label } from 'semantic-ui-react'
+
 import { postRequest } from "../util/request";
 
 export default ({ setLoggedIn }) => {
@@ -44,12 +46,13 @@ export default ({ setLoggedIn }) => {
         <Fragment>
             {error ? errorDiv : <div></div>}
             <form onSubmit={(e) => submitLogin(e)}>
-                <label>Username or Email: </label>
-                <input type="text" value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value)} />
+                <Label>Username or Email: </Label>
+                <Input type="text" value={usernameOrEmail} onChange={(e) => setUsernameOrEmail(e.target.value)} />
                 <br />
-                <label>Password: </label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit"> Log In </button>
+                <Label>Password: </Label>
+                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <br />
+                <Button type="submit"> Log In </Button>
             </form>
         </Fragment>
     )

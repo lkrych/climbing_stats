@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { Button } from 'semantic-ui-react'
 
 import { range, rangeWithChars } from "../util/util";
 
@@ -22,16 +23,16 @@ export default ({type, addClimb, climbs}) => {
     }
 
     const boulderRangeChoices = [
-        <button key={"V0-V5"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V0-V5")}}>V0-V5</button>,
-        <button key={"V6-V10"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V6-V10")}}>V6-V10</button>,
-        <button key={"V11-V16"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V11-V16")}}>V11-V16</button>
+        <Button key={"V0-V5"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V0-V5")}}>V0-V5</Button>,
+        <Button key={"V6-V10"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V6-V10")}}>V6-V10</Button>,
+        <Button key={"V11-V16"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V11-V16")}}>V11-V16</Button>
     ];
 
     const routeRangeChoices = [
-        <button key={"5.0-5.9"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.0-5.9")}}>5.0-5.9</button>,
-        <button key={"5.10-5.11"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.11")}}>5.10-5.11</button>,
-        <button key={"5.12-5.13"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.12-5.13")}}>5.12-5.13</button>,
-        <button key={"5.14-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.14-5.15")}}>5.14-5.15</button>
+        <Button key={"5.0-5.9"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.0-5.9")}}>5.0-5.9</Button>,
+        <Button key={"5.10-5.11"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.11")}}>5.10-5.11</Button>,
+        <Button key={"5.12-5.13"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.12-5.13")}}>5.12-5.13</Button>,
+        <Button key={"5.14-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.14-5.15")}}>5.14-5.15</Button>
     ];
 
     const letterGrades = ['a','b','c','d'];
