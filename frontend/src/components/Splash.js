@@ -1,18 +1,34 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
-import { Button } from 'semantic-ui-react'
+import { Container, Header, Icon, Button } from 'semantic-ui-react'
+import "../../index.css";
 
-export default ({ setShowSignup }) => (
-    <div>
-        <h1>Splash! Keep track of your climbs.</h1>
-        <div>
-            <p>Scroll down to see this paragraph about how to use this app. Get started below</p>
-            <div>
-                <NavLink to="/signup"><Button onClick={() => setShowSignup(false)}>Sign Up</Button></NavLink>
-                <NavLink to="/login"><Button onClick={() => setShowSignup(true)}>Log In</Button></NavLink>
+export default ({ setShowSignup, mobile }) => {
+    return (
+        <Fragment>
+            <div className="background-container">
+                <Container fluid >
+                    <h1 className="splash-header-desktop">
+                        Climbing Stats
+                    </h1>
+                    <h2 className="splash-secondary-desktop">
+                        Simple logging for your climbs
+                    </h2>
+                    <NavLink to="/signup">
+                        <Button 
+                            onClick={() => setShowSignup(false)} 
+                            color='orange' 
+                            size='huge'
+                            style={{
+                                marginLeft: '10vw'
+                            }}
+                        >
+                            Sign up
+                            <Icon name='right arrow' />
+                        </Button>
+                    </NavLink>
+                </Container>
             </div>
-        </div>
-    </div>
-    
-
-);
+        </Fragment>
+    );
+};
