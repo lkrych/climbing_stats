@@ -27,6 +27,9 @@ init-db:
 	cd db && python init_db.py
 	FLASK_APP=${FLASK_APP} \
 	ENV=development \
+	flask reset-db
+	FLASK_APP=${FLASK_APP} \
+	ENV=development \
 	flask seed-db
 
 build-image-prod:
