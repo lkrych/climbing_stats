@@ -22,7 +22,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
 
     const homeLink = (
         <NavLink to="/">
-            <span className="semantic-orange">
+            <span className="climbing-orange">
                 <i 
                     className="fas fa-mountain fa-lg"
                     onClick={() => setShowSignup(false)}>
