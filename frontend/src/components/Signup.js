@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { Button, Input, Label } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 import { useHistory } from "react-router-dom";
 import { postRequest } from "../util/request";
 
@@ -73,20 +73,42 @@ export default ({setLoggedIn}) => {
 
     return (
         <Fragment>
-            {error ? errorDiv : <div></div>}
-            <form onSubmit={(e) => submitSignup(e)}>
-                <Label>Username: </Label>
-                <Input type="text" value={username} required onChange={(e) => setUsername(e.target.value)} />
-                <br />
-                <Label>Email: </Label>
-                <Input type="email" value={email} required onChange={(e) => setEmail(e.target.value)} />
-                {passError ? passErrorMessage : null}
-                <br />
-                <Label>Password: </Label>
-                <Input type="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
-                <br />
-                <Button type="submit"> Sign Up </Button>
-            </form>
-        </Fragment>  
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <Header as='h2' color='orange' textAlign='center'>
+                        Sign up for Climbing Stats
+                    </Header>
+                    {error ? errorDiv : <div></div>}
+                    <Form onSubmit={(e) => submitSignup(e)}>
+                        <Segment stacked>
+                            <Form.Input 
+                                fluid icon='user' 
+                                iconPosition='left' 
+                                placeholder='Username' 
+                                value={username} onChange={(e) => setUsername(e.target.value)} 
+                            />
+                            <Form.Input 
+                                fluid icon='mail' 
+                                iconPosition='left' 
+                                placeholder='E-mail' 
+                                value={email} onChange={(e) => setEmail(e.target.value)} 
+                            />
+                            {passError ? passErrorMessage : null}
+                            <Form.Input
+                                fluid
+                                icon='lock'
+                                iconPosition='left'
+                                placeholder='Password'
+                                type='password'
+                                required
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <Button type="submit" color='orange' fluid size='large'> Sign up </Button>
+                        </Segment>
+                    </Form>
+                </Grid.Column>
+            </Grid>
+        </Fragment>
     )
 };
