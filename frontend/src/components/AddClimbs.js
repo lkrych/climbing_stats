@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { Button, Input, Label } from 'semantic-ui-react'
+import { Button, Grid, Segment} from 'semantic-ui-react'
 
 import ClimbForm from "./ClimbForm";
 import Climb from "./Climb";
@@ -20,22 +20,34 @@ export default ({boulders, setBoulders, routes, setRoutes, removeFromArray}) => 
 
     return(
         <Fragment>
-            <div>
-                Boulders: {boulders.map((b, i) => <Climb key={i} type="boulder" grade={b} index={i} removeFromArray={removeFromArray} /> )}
-            </div>
-            <div>
-                Routes: {routes.map((r, i) => <Climb key={i} type="route" grade={r} index={i} removeFromArray={removeFromArray}/>)}
-            </div>
             <br></br>
-            <Button onClick={(e) => toggleBoulderForm(e)}>
-                Add Boulder
-            </Button>
-            {showBoulderForm ? <ClimbForm type="boulder" addClimb={setBoulders} climbs={boulders} /> : null}
-            <br></br>
-            <Button onClick={(e) => toggleRouteForm(e)}>
-                Add Route
-            </Button>
-            {showRouteForm ? <ClimbForm type="route" addClimb={setRoutes} climbs={routes} /> : null}
+            <Grid celled='internally' stackable>
+                <Grid.Row verticalAlign='middle'>
+                    <Grid.Column width={8}  textAlign='center'>
+                        <Segment textAlign="left">
+                            <div>
+                                Boulders:  {boulders.map((b, i) => <Climb key={i} type="boulder" grade={b} index={i} removeFromArray={removeFromArray} /> )}
+                            </div>
+                        </Segment>
+                        <Button color='orange' size='large' onClick={(e) => toggleBoulderForm(e)}>
+                            Add Boulder
+                        </Button>
+                        {showBoulderForm ? <ClimbForm type="boulder" addClimb={setBoulders} climbs={boulders} /> : null}
+                    </Grid.Column>
+                    <Grid.Column width={8} textAlign='center'>
+                        <Segment textAlign="left">
+                            <div>
+                                Routes: {routes.map((r, i) => <Climb key={i} type="route" grade={r} index={i} removeFromArray={removeFromArray}/>)}
+                            </div>
+                        </Segment>
+                        <Button className="route-easy color-button-text" size='large' onClick={(e) => toggleRouteForm(e)}>
+                            Add Route
+                        </Button >
+                        {showRouteForm ? <ClimbForm type="route" addClimb={setRoutes} climbs={routes} /> : null}
+
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         </Fragment>
     );
 }

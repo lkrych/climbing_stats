@@ -22,7 +22,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
 
     const homeLink = (
         <NavLink to="/">
-            <span className="semantic-orange">
+            <span className="climbing-orange">
                 <i 
                     className="fas fa-mountain fa-lg"
                     onClick={() => setShowSignup(false)}>
@@ -34,7 +34,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
 
     const addWorkoutLink = (
         <Button onClick={(e) => goToWorkout(e)} color='orange' fluid size='large'>
-            <Icon color='orange' name='add circle' />
+            <Icon name='add circle' />
             Add Workout
         </Button>
     );
@@ -44,11 +44,15 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
             <Menu > 
                 <Menu.Item>
                     {homeLink}
-                    { location.pathname == "/workout/create" ? null : addWorkoutLink }
                 </Menu.Item>
-                <Menu.Item>
-                    <Button onClick={(e) => logOut(e)} color='orange' fluid size='large'> Logout</Button>
-                </Menu.Item>
+                <Menu.Menu position='right'>
+                    <Menu.Item>
+                        { location.pathname == "/workout/create" ? null : addWorkoutLink }
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button onClick={(e) => logOut(e)} color='orange' fluid size='large'> Logout</Button>
+                    </Menu.Item>
+                </Menu.Menu>
             </Menu>
         )
     } else {

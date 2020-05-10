@@ -51,7 +51,7 @@ export default ({ setLoggedIn }) => {
                     </Header>
                     {error ? errorDiv : <div></div>}
                     <Form onSubmit={(e) => submitLogin(e)}>
-                        <Segment stacked>
+                        <Segment raised>
                             <Form.Input 
                                 fluid icon='user' 
                                 iconPosition='left' 
