@@ -26,7 +26,6 @@ export default ({ setLoggedIn }) => {
                 "password": pass
             }
         ).then((json) => {
-            console.log(json);
             if (!json.access_token) {
                 setError(json.description);
             } else {
