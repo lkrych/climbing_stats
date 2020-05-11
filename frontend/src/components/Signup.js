@@ -75,7 +75,7 @@ export default ({setLoggedIn}) => {
                     <Header as='h2' color='orange' textAlign='center'>
                         Sign up for Climbing Stats
                     </Header>
-                    {error ? errorDiv : <div></div>}
+                    {error ? errorDiv : null}
                     <Form onSubmit={(e) => submitSignup(e)}>
                         <Segment raised>
                             <Form.Input 

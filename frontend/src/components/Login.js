@@ -48,7 +48,7 @@ export default ({ setLoggedIn }) => {
                     <Header as='h2' color='orange' textAlign='center'>
                         Login to your account
                     </Header>
-                    {error ? errorDiv : <div></div>}
+                    {error ? errorDiv : null}
                     <Form onSubmit={(e) => submitLogin(e)}>
                         <Segment raised>
                             <Form.Input 
