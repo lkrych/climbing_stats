@@ -1,7 +1,7 @@
 import click
 from flask.cli import with_appcontext
 import datetime
-from random import randrange
+import random
 
 from climbing_stats_backend.helpers.factory_helpers import db, bcrypt
 from climbing_stats_backend.models.user import Users
@@ -56,22 +56,27 @@ def create_workout(user_id, climbcount = 20):
 def create_boulders(user_id, workout_id):
     c = Climbs(
         type = 0,
-        grade = randrange(0,14),
+        grade = random.randrange(0,14),
         user_id = user_id,
         workout_id = workout_id
     )
     return c
 
 def create_routes(user_id, workout_id):
+    grade = random.randrange(7,14)
+    letter_grade = None
+    if grade > 9 :
+        letter_grade = random.choice(["a", "b", "c", "d"])
     c = Climbs(
         type = 1,
-        grade = randrange(7,14),
+        grade = grade,
         user_id = user_id,
-        workout_id = workout_id
+        workout_id = workout_id,
+        letter_grade = letter_grade
     )
     return c
 
 def random_date():
     #random between jan-mar
-    d = datetime.datetime(2020, randrange(1,4), randrange(1, 29), 18, 00)
+    d = datetime.datetime(2020, random.randrange(1,4), random.randrange(1, 29), 18, 00)
     return datetime.datetime.timestamp(d)
