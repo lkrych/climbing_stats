@@ -1,22 +1,34 @@
 const API_HOST = process.env.API_HOST
 
-export const getRequest = (route) => {
-    fetch(`http://${API_HOST}${route}`, {
+const buildUrl = (route, paramsObj = {}) => {
+    let url = `http://${API_HOST}${route}`;
+    let params = Object.keys(paramsObj);
+    if (params.length > 0) {
+        url += '?'
+        let queryString = params.map(key => key + '=' + paramsObj[key]).join('&');
+        url += queryString
+    }
+    return url;
+}
+
+export const getRequest = (route, params = {}) => {
+    let url = buildUrl(route, params);
+    return fetch(url, {
+        method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'Content-Type': 'application/json',
         }
     })
-    .then((response) => {
-        return response.json();
-    })
+    .then(handleResponse)
+    .then(json => json)
 }
 
 export const postRequest = (route, data) => {
-    const url = `http://${API_HOST}${route}`
-    console.log(`posting to ${url} with ${JSON.stringify(data)}`)
-   return fetch(url, {
+    let url = buildUrl(route);
+    return fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -24,7 +36,6 @@ export const postRequest = (route, data) => {
             'Access-Control-Allow-Origin': '*',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
             'Content-Type': 'application/json',
-
           },
     })
     .then(handleResponse)
