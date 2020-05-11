@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
+import { colorHash } from "../util/util";
+
 export default ({routeData, boulderData}) => {
     const leftContainer = useRef(null);
     const rightContainer = useRef(null); //useRef hook creates a variable that holds on to a value throughout rendering
@@ -17,19 +19,7 @@ export default ({routeData, boulderData}) => {
     }, [routeData, rightContainer.current])
 
     //replace this object with a regex function that handles various cases and returns appropriate hex
-    const barColors = {
-        "9": "#FFC300",
-        "10a": "#FFC300",
-        "10b": "#FFC300",
-        "10c": "#FFC300",
-        "10d": "#FFC300",
-        "11a": "#FF5733",
-        "11b": "#FF5733",
-        "11c": "#FF5733",
-        "11d": "#FF5733",
-        "12a": "#C70039",
-        "V3": "green"
-    };
+    const barColors = colorHash;
 
     //adapted from the following tutorials: https://observablehq.com/@d3/horizontal-bar-chart#data
     // https://codepen.io/tfaramar/pen/qBOVbQO?editors=1010
