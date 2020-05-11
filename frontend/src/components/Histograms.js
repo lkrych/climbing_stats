@@ -5,8 +5,6 @@ export default ({routeData, boulderData}) => {
     const leftContainer = useRef(null);
     const rightContainer = useRef(null); //useRef hook creates a variable that holds on to a value throughout rendering
     
-    routeData = [{ grade: "9", value: 2 }, { grade: "10a", value: 3 }, { grade: "10b", value: 4 }, { grade: "10c", value: 6 }, { grade: "10d", value: 3 }, { grade: "11a", value: 2 }, { grade: "11b", value: 3 }, { grade: "11c", value: 2 }, { grade: "11d", value: 1 }, { grade: "12a", value: 1 }];
-    boulderData = [{ grade: "V3", value: 6 }, { grade: "V4", value: 3 }, { grade: "V5", value: 4 }, { grade: "V6", value: 2 }];
     // format routeData and boulderData as k/v pairs in histogram data passed in
 
     useEffect(() => {
