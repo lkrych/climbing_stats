@@ -16,7 +16,6 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
 
     const goToWorkout = (e) => {
       e.preventDefault();
-      console.log(location.pathname);
       history.push('/workout/create')  
     };
 

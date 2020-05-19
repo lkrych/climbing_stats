@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 
-export default () => {
+import { colorHash } from "../util/util";
+
+export default ({routeData, boulderData}) => {
     const leftContainer = useRef(null);
     const rightContainer = useRef(null); //useRef hook creates a variable that holds on to a value throughout rendering
     
-    const routeData = [{ grade: "9", value: 2 }, { grade: "10a", value: 3 }, { grade: "10b", value: 4 }, { grade: "10c", value: 6 }, { grade: "10d", value: 3 }, { grade: "11a", value: 2 }, { grade: "11b", value: 3 }, { grade: "11c", value: 2 }, { grade: "11d", value: 1 }, { grade: "12a", value: 1 }];
-    const boulderData = [{ grade: "V3", value: 6 }, { grade: "V4", value: 3 }, { grade: "V5", value: 4 }, { grade: "V6", value: 2 }];
     // format routeData and boulderData as k/v pairs in histogram data passed in
 
     useEffect(() => {
@@ -19,19 +19,7 @@ export default () => {
     }, [routeData, rightContainer.current])
 
     //replace this object with a regex function that handles various cases and returns appropriate hex
-    const barColors = {
-        "9": "#FFC300",
-        "10a": "#FFC300",
-        "10b": "#FFC300",
-        "10c": "#FFC300",
-        "10d": "#FFC300",
-        "11a": "#FF5733",
-        "11b": "#FF5733",
-        "11c": "#FF5733",
-        "11d": "#FF5733",
-        "12a": "#C70039",
-        "V3": "green"
-    };
+    const barColors = colorHash;
 
     //adapted from the following tutorials: https://observablehq.com/@d3/horizontal-bar-chart#data
     // https://codepen.io/tfaramar/pen/qBOVbQO?editors=1010
