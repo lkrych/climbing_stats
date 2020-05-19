@@ -26,7 +26,6 @@ export default ({ setLoggedIn }) => {
                 "password": pass
             }
         ).then((json) => {
-            console.log(json);
             if (!json.access_token) {
                 setError(json.description);
             } else {
@@ -49,7 +48,7 @@ export default ({ setLoggedIn }) => {
                     <Header as='h2' color='orange' textAlign='center'>
                         Login to your account
                     </Header>
-                    {error ? errorDiv : <div></div>}
+                    {error ? errorDiv : null}
                     <Form onSubmit={(e) => submitLogin(e)}>
                         <Segment raised>
                             <Form.Input 

@@ -14,7 +14,6 @@ export default ({setLoggedIn}) => {
     const submitSignup = (e) => {
         e.preventDefault();
         if (!validatePassword(password)) {
-            console.log('invalid password');
             setPassError('Your password must be at least six characters long and include at least one special character, and one number.')
         } else {
             const usern = username;
@@ -31,7 +30,6 @@ export default ({setLoggedIn}) => {
                     "password": pass
                 }
             ).then((json) => {
-                console.log(json);
                 if (!json.access_token) {
                     setError(json.description);
                 } else {
@@ -45,7 +43,6 @@ export default ({setLoggedIn}) => {
     }
 
     const validatePassword = (password) => {
-        console.log("checkin' password!")
         let specialChars = "~!@#$%^&*()_+`{}[];:'<>?/,.";
         let nums = "1234567890";
 
@@ -78,7 +75,7 @@ export default ({setLoggedIn}) => {
                     <Header as='h2' color='orange' textAlign='center'>
                         Sign up for Climbing Stats
                     </Header>
-                    {error ? errorDiv : <div></div>}
+                    {error ? errorDiv : null}
                     <Form onSubmit={(e) => submitSignup(e)}>
                         <Segment raised>
                             <Form.Input 
