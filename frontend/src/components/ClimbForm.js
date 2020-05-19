@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import { Button } from 'semantic-ui-react'
 
 import { range, rangeWithChars } from "../util/util";
 
@@ -6,8 +7,11 @@ export default ({type, addClimb, climbs}) => {
     const [boulderSelection, setBoulderSelection] = useState(null);
     const [routeSelection, setRouteSelection] = useState(null);
 
-    const createRangeButtonList = (range = [], buttonInput, clickFunction) => {
-        return range.map((n) => <button key={n} onClick={(e) => clickFunction(e, n)}>{buttonInput}{n}</button>, range)
+    const createRangeButtonList = (range = [], buttonInput, clickFunction, type) => {
+        if (type == "boulder"){
+            return range.map((n) => <Button className={`${buttonInput}${n} color-button-text`} key={n} onClick={(e) => clickFunction(e, n)}>{buttonInput}{n}</Button>, range)
+        }
+        return range.map((n) => <Button className={`five-${n} color-button-text button-margin`} key={n} onClick={(e) => clickFunction(e, n)}>{buttonInput}{n}</Button>, range)
     }
 
     const addBoulderOrRoute = (e, grade) => {
@@ -16,22 +20,22 @@ export default ({type, addClimb, climbs}) => {
     }
 
     const boulderSelectionChoices = {
-        "V0-V5": createRangeButtonList(range(6, 0), 'V', addBoulderOrRoute),
-        "V6-V10": createRangeButtonList(range(5, 6), 'V', addBoulderOrRoute),
-        "V11-V16": createRangeButtonList(range(6, 11), 'V', addBoulderOrRoute),
+        "V0-V5": createRangeButtonList(range(6, 0), 'V', addBoulderOrRoute, "boulder"),
+        "V6-V10": createRangeButtonList(range(5, 6), 'V', addBoulderOrRoute, "boulder"),
+        "V11-V16": createRangeButtonList(range(6, 11), 'V', addBoulderOrRoute, "boulder"),
     }
 
     const boulderRangeChoices = [
-        <button key={"V0-V5"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V0-V5")}}>V0-V5</button>,
-        <button key={"V6-V10"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V6-V10")}}>V6-V10</button>,
-        <button key={"V11-V16"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V11-V16")}}>V11-V16</button>
+        <Button className="boulder-easy color-button-text button-margin" key={"V0-V5"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V0-V5")}}>V0-V5</Button>,
+        <Button className="boulder-medium color-button-text button-margin " key={"V6-V10"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V6-V10")}}>V6-V10</Button>,
+        <Button className="boulder-hard color-button-text button-margin" key={"V11-V16"} onClick={(e) => { e.preventDefault(); setBoulderSelection("V11-V16")}}>V11-V16</Button>
     ];
 
     const routeRangeChoices = [
-        <button key={"5.0-5.9"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.0-5.9")}}>5.0-5.9</button>,
-        <button key={"5.10-5.11"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.11")}}>5.10-5.11</button>,
-        <button key={"5.12-5.13"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.12-5.13")}}>5.12-5.13</button>,
-        <button key={"5.14-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.14-5.15")}}>5.14-5.15</button>
+        <Button className="route-easiest color-button-text button-margin" key={"5.0-5.9"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.0-5.9")}}>5.0-5.9</Button>,
+        <Button className="route-easy color-button-text button-margin" key={"5.10-5.11"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.10-5.11")}}>5.10-5.11</Button>,
+        <Button className="route-medium color-button-text button-margin" key={"5.12-5.13"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.12-5.13")}}>5.12-5.13</Button>,
+        <Button className="route-hard color-button-text button-margin" key={"5.14-5.15"} onClick={(e) => { e.preventDefault(); setRouteSelection("5.14-5.15")}}>5.14-5.15</Button>
     ];
 
     const letterGrades = ['a','b','c','d'];

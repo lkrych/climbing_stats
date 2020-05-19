@@ -1,0 +1,277 @@
+.background-container {
+    background-image: url(./resources/splash.jpg);
+    height:100vh;
+    width:100vw;
+}
+
+.splash-header-desktop {
+    font-size: 10em;
+    font-weight: normal;
+    margin-bottom: 0;
+    padding-top: 10vh;
+    padding-left: 10vw;
+    color: white;
+}
+
+.splash-secondary-desktop {
+    font-size: 3em;
+    font-weight: normal;
+    margin-top:  10vh;
+    padding-left: 10vw;;
+    color: white;
+}
+
+.climbing-orange {
+    color: #f26202 
+}
+
+.color-button-text {
+    color: #fff !important
+}
+
+.button-margin {
+    margin-bottom: 0.5em !important;
+}
+/* could use a variable here for the orange */
+
+.boulder-easy {
+    background: #FCBF49 !important;
+}
+/* Gradient created with this tool https://meyerweb.com/eric/tools/color-blend/#FCBF49:F26202:5:hex */
+.V0 {
+    background: #FCBF49 !important;
+}
+
+.V1 {
+    background: #FAB03D !important;
+}
+
+.V2 {
+    background: #F9A031 !important;
+}
+
+.V3 {
+    background: #F79126 !important;
+}
+
+.V4 {
+    background: #F5811A !important;
+}
+
+.V5 {
+    background: #F4720E !important;
+}
+
+.boulder-medium {
+    background: #f26202 !important
+}
+
+.V6 {
+    background: #f26202 !important
+}
+
+.V7 {
+    background: #EC560A !important;
+}
+
+.V8 {
+    background: #E74B11 !important;
+}
+
+.V9 {
+    background: #E13F19 !important;
+}
+
+.V10 {
+    background: #DC3420 !important;
+}
+
+.boulder-hard {
+    background: #D62828 !important
+}
+
+.V11 {
+    background: #D62828 !important;
+}
+
+.V12 {
+    background: #BD2020 !important;
+}
+
+.V13 {
+    background: #A41818 !important;
+}
+
+.V14 {
+    background: #8C1011!important;
+}
+
+.V15 {
+    background: #730809 !important;
+}
+
+.V16 {
+    background: #5A0001 !important;
+}
+
+.boulder-hardest {
+    background: #5A0001 !important;
+}
+
+.route-easiest {
+    background: #6096BA !important
+}
+
+.five-0 {
+    background: #6096BA !important;
+}
+
+.five-1 {
+    background:#5A92B7 !important;
+}
+
+.five-2 {
+    background: #538DB5 !important;
+}
+
+.five-3 {
+    background: #4D89B2 !important;
+}
+
+.five-4 {
+    background: #4784B0 !important;
+}
+
+.five-5 {
+    background: #4080AD !important;
+}
+
+.five-6 {
+    background: #3A7BAB !important;
+}
+
+.five-7 {
+    background: #3377A8 !important;
+}
+
+.five-8 {
+    background: #2D72A6 !important;
+}
+
+.five-9 {
+    background: #276EA3 !important;
+}
+
+.route-easy {
+    background: #1A659E !important
+}
+
+
+.five-10a {
+    background: #276EA3 !important;
+}
+
+.five-10b {
+    background: #246A9B !important;
+}
+
+.five-10c {
+    background: #226592 !important;
+}
+
+.five-10d{
+    background: #1F618A!important;
+}
+
+.five-11a {
+    background: #1C5D81 !important;
+}
+
+.five-11b {
+    background: #195879 !important;
+}
+
+.five-11c {
+    background: #175470!important;
+}
+
+.five-11d{
+    background: #144F68 !important;
+}
+
+.route-medium {
+    background: #114B5F !important
+}
+
+
+.five-12a {
+    background: #114B5F  !important;
+}
+
+.five-12b {
+    background: #194C60 !important;
+}
+
+.five-12c {
+    background: #204D61 !important;
+}
+
+.five-12d{
+    background: #284D62 !important;
+}
+
+.five-13a {
+    background: #304E63 !important;
+}
+
+.five-13b {
+    background: #374F63 !important;
+}
+
+.five-13c {
+    background: #3F5064 !important;
+}
+
+.five-13d{
+    background: #465065 !important;
+}
+
+.route-hard {
+    background: #4E5166 !important
+}
+
+.five-14a {
+    background: #4E5166 !important;
+}
+
+.five-14b {
+    background: #4B4D60 !important;
+}
+
+.five-14c {
+    background: #48485A !important;
+}
+
+.five-14d{
+    background: #444454 !important;
+}
+
+.five-15a {
+    background: #41404F !important;
+}
+
+.five-15b {
+    background: #3E3B49 !important;
+}
+
+.five-15c {
+    background: #3B3743!important;
+}
+
+.five-15d{
+    background: #37323D !important;
+}
+
+.route-hardest {
+    background: #342E37 !important
+}

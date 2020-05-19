@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { Menu, Icon, Button } from 'semantic-ui-react'
+import "../../index.css";
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     let history = useHistory();
@@ -18,26 +20,62 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
       history.push('/workout/create')  
     };
 
-    const addWorkoutLink = (<li>
-                            <button onClick={(e) => goToWorkout(e)}>Add Workout</button>
-                        </li>);
+    const homeLink = (
+        <NavLink to="/">
+            <span className="climbing-orange">
+                <i 
+                    className="fas fa-mountain fa-lg"
+                    onClick={() => setShowSignup(false)}>
+                </i>
+
+            </span>
+        </NavLink>
+    );
+
+    const addWorkoutLink = (
+        <Button onClick={(e) => goToWorkout(e)} color='orange' fluid size='large'>
+            <Icon name='add circle' />
+            Add Workout
+        </Button>
+    );
 
     if (loggedIn) {
         return (
-            <div> 
-                <NavLink to="/"><li onClick={() => setShowSignup(false)}>LOGO!</li></NavLink>
-                { location.pathname == "/workout/create" ? null : addWorkoutLink }
-                <li>
-                    <button onClick={(e) => logOut(e)}> Logout</button>
-                </li>
-            </div>
+            <Menu > 
+                <Menu.Item>
+                    {homeLink}
+                </Menu.Item>
+                <Menu.Menu position='right'>
+                    <Menu.Item>
+                        { location.pathname == "/workout/create" ? null : addWorkoutLink }
+                    </Menu.Item>
+                    <Menu.Item>
+                        <Button onClick={(e) => logOut(e)} color='orange' fluid size='large'> Logout</Button>
+                    </Menu.Item>
+                </Menu.Menu>
+            </Menu>
         )
     } else {
         return (
-            <div>
-                <NavLink to="/"><li onClick={() => setShowSignup(false)}>LOGO!</li></NavLink>
-                <NavLink to={showSignup ? "/signup" : "/login"}><button onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}</button></NavLink>
-            </div>
+            <Menu 
+                style={{
+                    margin: 0
+                }}
+            >
+                <Menu.Item>
+                    {homeLink}
+                </Menu.Item>
+                
+                <Menu.Menu position='right'>
+                    <Menu.Item>
+                        <NavLink to={showSignup ? "/signup" : "/login"}>
+                            <Button color='orange' fluid size='large' onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}
+                            </Button>
+                        </NavLink>
+                    </Menu.Item>
+                </Menu.Menu>
+                
+            </Menu>
         )
     }
   

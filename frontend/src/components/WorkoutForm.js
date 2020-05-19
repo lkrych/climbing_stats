@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button, Form, Segment, Header, Grid, Divider, Icon } from 'semantic-ui-react'
+
 
 import AddClimbs from "./AddClimbs";
 import { postRequest } from '../util/request';
@@ -55,24 +57,34 @@ export default () => {
 
     return (
         <Fragment>
-            { message ? <div>{message}</div> : null }
-            <h2>Enter your climbs</h2>
-            <form onSubmit={(e) => submitWorkout(e)}>
-                <label>Date: </label>
-                <DatePicker
-                    selected={date}
-                    onChange={(e) => handleDateChange(e)}
-                />
-                <AddClimbs
-                    boulders={boulders}
-                    setBoulders={setBoulders}
-                    routes={routes}
-                    setRoutes={setRoutes}
-                    removeFromArray={removeFromArray}
-                />
-                <br />
-                <button type="submit"> Enter Workout </button>
-            </form>
+            <Grid textAlign='center' style={{ height: '100vh'}} verticalAlign='middle'>
+                <Grid.Column style={{ maxWidth: '85vw' }}>
+                    { message ? <div>{message}</div> : null }
+                    <Header as='h2' color='orange' textAlign='left'>
+                        Enter your climbs
+                    </Header>
+                    <Form onSubmit={(e) => submitWorkout(e)}>
+                        <Segment raised textAlign='left'>
+                            <Icon size="big" name="calendar" color='orange'/>
+                            <DatePicker
+                                selected={date}
+                                onChange={(e) => handleDateChange(e)}
+                            />
+                            <Divider></Divider>
+                            <AddClimbs
+                                boulders={boulders}
+                                setBoulders={setBoulders}
+                                routes={routes}
+                                setRoutes={setRoutes}
+                                removeFromArray={removeFromArray}
+                            />
+                            <Divider></Divider>
+                            <Button type="submit" color='orange' size='large'> Enter Workout </Button>
+                        </Segment>
+                    </Form>
+                </Grid.Column>
+
+            </Grid>
         </Fragment>  
     )
 };
