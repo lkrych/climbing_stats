@@ -5,15 +5,19 @@
 ### 4/3-4/5 Hackathon
 
 * [ ] Data Presentation: Frontend
-    * [ ] Histogram
-    * [ ] Summary Stats
-    * [ ] Time period, last week, last month, last year
+    * [x] Histogram
+    * [x] Summary Stats
+    * [x] Time period, last week, last month, last year
     * [ ] Mobile-first design 
     * [ ] User stories/features:
         * [x] Sign up for service
         * [x] Log in to/log out of service
         * [x] Log a workout (consisting of 1+ climbs) -> form
-        * [ ] On login, see composite of climbing stats (last week, last month, last year)
+        * [x] On login, see composite of climbing stats (last week, last month, last year)
+        * [ ] Be able to add notes about a workout
+        * [ ] Be able to search for climb or workout (search bar)
+        * [ ] Be able to see an individual workout  
+        * [ ] Be able to navigate from summary to individual workout.
 
 * [x] Backend
     * [x] use a production-grade server in docker
@@ -29,7 +33,7 @@
 
 ## Nice to have (future hackathon)
 * [ ] Git Hook for push?
-* [ ] Clean up Readme, combine all of 'em
+* [x] Clean up Readme, combine all of 'em
 * [ ] E-mail confirmation for signup to guard user creation
 * [ ] Strava link/push --> dependent on Data Presentation
 * [ ] Rate-Limiting
