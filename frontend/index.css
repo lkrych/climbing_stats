@@ -1,16 +1,8 @@
 .background-container {
-    background-image: url(./resources/splash.jpg);
+    background-image: url(./resources/jamie-hagan-RWzPBcWVdpw-unsplash.jpg);
+    background-size: cover;
     height:100vh;
     width:100vw;
-}
-
-.splash-header-desktop {
-    font-size: 10em;
-    font-weight: normal;
-    margin-bottom: 0;
-    padding-top: 10vh;
-    padding-left: 10vw;
-    color: white;
 }
 
 .splash-secondary-desktop {
