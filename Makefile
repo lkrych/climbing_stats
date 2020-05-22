@@ -24,7 +24,9 @@ docker-dev: build-image-dev
 	climbing_stats_img
 
 init-db:
-	cd db && python init_db.py
+	cd db && rm -f climbing_stats.db && python init_db.py
+
+reset-db:
 	FLASK_APP=${FLASK_APP} \
 	ENV=development \
 	flask reset-db
