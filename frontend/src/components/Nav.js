@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { Menu, Icon, Button } from 'semantic-ui-react'
-import "../../index.css";
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     let history = useHistory();
