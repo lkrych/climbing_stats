@@ -7,7 +7,7 @@ backend-dev:
 	python3 -m flask run --host=0.0.0.0
 
 frontend-dev:
-	cd frontend && npm start
+	cd frontend && npm install && npm start
 
 test:
 	pytest --setup-show
