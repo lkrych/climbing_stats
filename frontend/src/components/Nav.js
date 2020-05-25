@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
-import { Menu, Icon, Button } from 'semantic-ui-react'
-import "../../index.css";
+
+import { Menu, Icon } from 'semantic-ui-react';
+import { Button } from '../styled/styled_components';
 
 export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
     let history = useHistory();
@@ -49,7 +50,7 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
                         { location.pathname == "/workout/create" ? null : addWorkoutLink }
                     </Menu.Item>
                     <Menu.Item>
-                        <Button onClick={(e) => logOut(e)} color='orange' fluid size='large'> Logout</Button>
+                        <Button onClick={(e) => logOut(e)}> Logout</Button>
                     </Menu.Item>
                 </Menu.Menu>
             </Menu>
@@ -68,7 +69,8 @@ export default ({ loggedIn, setLoggedIn, showSignup, setShowSignup }) => {
                 <Menu.Menu position='right'>
                     <Menu.Item>
                         <NavLink to={showSignup ? "/signup" : "/login"}>
-                            <Button color='orange' fluid size='large' onClick={() => setShowSignup(!showSignup)}>{showSignup ? "Sign Up" : "Log In"}
+                            <Button onClick={() => setShowSignup(!showSignup)}>
+                                {showSignup ? "Sign Up" : "Log In"}
                             </Button>
                         </NavLink>
                     </Menu.Item>
