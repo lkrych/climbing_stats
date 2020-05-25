@@ -20,7 +20,7 @@ source climbing_stats_venv/bin/activate
 | ------------- |-------------|
 | Local Development | ```make backend-dev```| 
 | Docker Development | ```make docker-dev``` |
-| Frontend Devleopment | ``` make frontend-dev ``` |
+| Frontend Development | ``` make frontend-dev ``` |
 | Run Tests | ``` make test``` |   
 | Initialize Database | ``` make init-db ``` |  
 | Seed Database | ``` make reset-db ``` |   

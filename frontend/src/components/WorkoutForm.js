@@ -14,7 +14,7 @@ export default () => {
     const [routes, setRoutes] = useState([]);
     const [message, setMessage] = useState('');
     const [notes, setNotes] = useState('');
-    //show remaining character count in text area and manage on submission/block exceeding char count
+    //pass props to char count to turn red at 300 chars
 
     const handleDateChange = date => {
         setDate(date)
@@ -35,7 +35,9 @@ export default () => {
             copyBoulders.splice(index, 1)
             setBoulders(copyBoulders)
         }
-    }
+    };
+
+
 
     const submitWorkout = (e) => {
         e.preventDefault();
@@ -88,8 +90,9 @@ export default () => {
                             />
                             <Divider></Divider>
                             <TextArea placeholder='How was your workout?' value={notes} onChange={(e) => handleNotesChange(e)}/>
+                            <p>{notes.length} out of 300</p>
                             <Divider></Divider>
-                            <Button type="submit" color='orange' size='large'> Enter Workout </Button>
+                            <Button disabled={notes.length > 300} type="submit" color='orange' size='large'> Enter Workout </Button>
                         </Segment>
                     </Form>
                 </Grid.Column>
