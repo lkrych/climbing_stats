@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Button, Form, Segment, Header, Grid, Divider, Icon, TextArea } from 'semantic-ui-react'
+import { Button, Form, Segment, Header, Grid, Divider, Icon, TextArea } from 'semantic-ui-react';
 
-
+import { CharCount } from '../styled/styled_components';
 import AddClimbs from "./AddClimbs";
 import { postRequest } from '../util/request';
 import { getUserId } from '../util/jwt';
@@ -63,7 +63,7 @@ export default () => {
             });
     }
 
-    
+    const exceedChars = notes.length > 300;
 
     return (
         <Fragment>
@@ -90,9 +90,9 @@ export default () => {
                             />
                             <Divider></Divider>
                             <TextArea placeholder='How was your workout?' value={notes} onChange={(e) => handleNotesChange(e)}/>
-                            <p>{notes.length} out of 300</p>
+                            <CharCount exceedChars={exceedChars}>{notes.length} out of 300</CharCount>
                             <Divider></Divider>
-                            <Button disabled={notes.length > 300} type="submit" color='orange' size='large'> Enter Workout </Button>
+                            <Button disabled={exceedChars} type="submit" color='orange' size='large'> Enter Workout </Button>
                         </Segment>
                     </Form>
                 </Grid.Column>
