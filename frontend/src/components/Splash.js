@@ -5,6 +5,7 @@ import { Container, Header } from 'semantic-ui-react';
 import { Button, MainHeader, SubHeader, Text } from '../styled/styled_components';
 
 export default ({ setShowSignup }) => {
+
     return ( 
         <Fragment>
             <div className="background-container">

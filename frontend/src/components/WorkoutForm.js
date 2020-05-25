@@ -50,7 +50,6 @@ export default () => {
                     notes
                 }
             ).then((json) => {
-                console.log(json);
                 if (json.status_code == 200) {
                     setBoulders([]);
                     setRoutes([]);
