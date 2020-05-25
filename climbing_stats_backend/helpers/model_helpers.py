@@ -86,6 +86,7 @@ def get_all_workouts(from_timestamp, to_timestamp):
 def create_workout(user_id, req_json):
     new_workout = Workouts(
         date = req_json['date'],
+        notes = req_json['notes'],
         user_id = user_id
     )
     if 'boulders' in req_json:
@@ -117,6 +118,7 @@ def create_workout(user_id, req_json):
 def update_workout(user_id, workout_id, req_json):
     workout = get_workout(user_id, workout_id)
     workout.date = req_json.get('date', workout.date)
+    workout.notes = req_json.get('notes', workout.notes)
 
     try:
         for climb in req_json['climbs']:

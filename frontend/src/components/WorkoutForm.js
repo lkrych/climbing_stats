@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Button, Form, Segment, Header, Grid, Divider, Icon } from 'semantic-ui-react'
+import { Button, Form, Segment, Header, Grid, Divider, Icon, TextArea } from 'semantic-ui-react'
 
 
 import AddClimbs from "./AddClimbs";
@@ -13,9 +13,15 @@ export default () => {
     const [boulders, setBoulders] = useState([]);
     const [routes, setRoutes] = useState([]);
     const [message, setMessage] = useState('');
+    const [notes, setNotes] = useState('');
+    //pass props to char count to turn red at 300 chars
 
     const handleDateChange = date => {
         setDate(date)
+    };
+
+    const handleNotesChange = e => {
+        setNotes(e.currentTarget.value);
     };
 
     const removeFromArray = (e, type, index) => {
@@ -29,7 +35,9 @@ export default () => {
             copyBoulders.splice(index, 1)
             setBoulders(copyBoulders)
         }
-    }
+    };
+
+
 
     const submitWorkout = (e) => {
         e.preventDefault();
@@ -38,12 +46,15 @@ export default () => {
                 {
                     date: date.getTime() / 1000, //for proper timestamp
                     boulders,
-                    routes
+                    routes,
+                    notes
                 }
             ).then((json) => {
+                console.log(json);
                 if (json.status_code == 200) {
                     setBoulders([]);
                     setRoutes([]);
+                    setNotes('');
                     setMessage('Your workout was added!')
                     setDate(new Date())
                 } else {
@@ -78,7 +89,10 @@ export default () => {
                                 removeFromArray={removeFromArray}
                             />
                             <Divider></Divider>
-                            <Button type="submit" color='orange' size='large'> Enter Workout </Button>
+                            <TextArea placeholder='How was your workout?' value={notes} onChange={(e) => handleNotesChange(e)}/>
+                            <p>{notes.length} out of 300</p>
+                            <Divider></Divider>
+                            <Button disabled={notes.length > 300} type="submit" color='orange' size='large'> Enter Workout </Button>
                         </Segment>
                     </Form>
                 </Grid.Column>

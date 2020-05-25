@@ -6,19 +6,24 @@ Supports both bouldering workouts or sport climbing workouts.
 
 ### Table of Contents
 * [Quickstart](#quickstart)
+* [Database](#database)
 * [Application Organization](#application-organization)
 * [API Spec](#api-spec)
 
 ### Quickstart
 
+```bash
+source climbing_stats_venv/bin/activate
+```
 
 | Command       | Description   |
 | ------------- |-------------|
 | Local Development | ```make backend-dev```| 
 | Docker Development | ```make docker-dev``` |
-| Frontend Devleopment | ``` make frontend-dev ``` |
+| Frontend Development | ``` make frontend-dev ``` |
 | Run Tests | ``` make test``` |   
-| Initialize and Seed Database | ``` make init-db ``` |   
+| Initialize Database | ``` make init-db ``` |  
+| Seed Database | ``` make reset-db ``` |   
 
 ### Development work
 
@@ -30,12 +35,7 @@ source climbing_stats_venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Resetting and Seeding Database
-
-```bash
-flask reset-db 
-flask seed-db
-```
+### Database
 
 More [database information](db/README.md)
 

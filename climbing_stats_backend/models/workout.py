@@ -4,6 +4,7 @@ from climbing_stats_backend.helpers.factory_helpers import db
 class Workouts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(128), default=datetime.timestamp(datetime.now()))
+    notes = db.Column(db.String(300))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
     user = db.relationship('Users', back_populates="workouts")
@@ -17,5 +18,6 @@ class Workouts(db.Model):
             "id": self.id,
             "date": datetime.fromtimestamp(float(self.date)),
             "user": self.user.to_json(),
-            "climbs": [c.to_json() for c in self.climbs]
+            "climbs": [c.to_json() for c in self.climbs],
+            "notes": self.notes
         }
