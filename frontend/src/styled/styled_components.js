@@ -42,3 +42,9 @@ export const Text = styled.p`
     font-weight: normal;
     color: white;
 `
+
+export const CharCount = styled.p`
+    font-size: 0.9rem;
+    margin: 0.5rem;
+    color: ${props => props.exceedChars ? "red" : "black"} 
+`
