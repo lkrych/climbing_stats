@@ -10,20 +10,15 @@ import Dashboard from "./components/Dashboard";
 import WorkoutForm from './components/WorkoutForm';
 
 export default () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage?.jwt);
   const [showSignup, setShowSignup] = useState(false); //need to set this as soon as login or signup endpoint is reached
 
-  console.log("AM I LOGGED IN?", loggedIn);
   return (
     <BrowserRouter>
       <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} showSignup={showSignup} setShowSignup={setShowSignup}/>
       <Switch>
-        <Route exact path="/signup">
-          <Signup setLoggedIn={setLoggedIn} />
-        </Route>
-        <Route exact path="/login">
-          <Login setLoggedIn={setLoggedIn} />
-        </Route>
+        <OpenRoute exact path="/signup" component={Signup} setLoggedIn={setLoggedIn} />
+        <OpenRoute exact path="/login" component={Login} setLoggedIn={setLoggedIn} />
         <OpenRoute exact path="/" component={Splash} loggedIn={loggedIn} setShowSignup={setShowSignup} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} loggedIn={loggedIn} />
         <ProtectedRoute exact path="/workout/create" component={WorkoutForm} loggedIn={loggedIn}/>
