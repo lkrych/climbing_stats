@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Button, Form, Segment, Header, Grid, Divider, Icon } from 'semantic-ui-react'
+import { Button, Form, Segment, Header, Grid, Divider, Icon, TextArea } from 'semantic-ui-react'
 
 
 import AddClimbs from "./AddClimbs";
@@ -13,9 +13,15 @@ export default () => {
     const [boulders, setBoulders] = useState([]);
     const [routes, setRoutes] = useState([]);
     const [message, setMessage] = useState('');
+    const [notes, setNotes] = useState('');
+    //show remaining character count in text area and manage on submission/block exceeding char count
 
     const handleDateChange = date => {
         setDate(date)
+    };
+
+    const handleNotesChange = e => {
+        setNotes(e.currentTarget.value);
     };
 
     const removeFromArray = (e, type, index) => {
@@ -38,12 +44,15 @@ export default () => {
                 {
                     date: date.getTime() / 1000, //for proper timestamp
                     boulders,
-                    routes
+                    routes,
+                    notes
                 }
             ).then((json) => {
+                console.log(json);
                 if (json.status_code == 200) {
                     setBoulders([]);
                     setRoutes([]);
+                    setNotes('');
                     setMessage('Your workout was added!')
                     setDate(new Date())
                 } else {
@@ -77,6 +86,8 @@ export default () => {
                                 setRoutes={setRoutes}
                                 removeFromArray={removeFromArray}
                             />
+                            <Divider></Divider>
+                            <TextArea placeholder='How was your workout?' value={notes} onChange={(e) => handleNotesChange(e)}/>
                             <Divider></Divider>
                             <Button type="submit" color='orange' size='large'> Enter Workout </Button>
                         </Segment>

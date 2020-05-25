@@ -205,11 +205,13 @@ def test_workout_create_auth_limited(test_client, init_database):
         json = {
             "date": 1578702677,
             "boulders": [9, 10, 11],
-            "routes": ['12a', '11a']
+            "routes": ['12a', '11a'],
+            "notes": "That crimpy 12 was hard!"
         }
     )
     assert success_response.status_code == 200
     assert b"10" in success_response.data
+    assert b"crimpy" in success_response.data
 
 def test_workout_update_auth_limited(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, new_default_username, new_default_password)
@@ -241,13 +243,15 @@ def test_workout_update_auth_limited(test_client, init_database):
                 {'grade': 14, 'id': 5, 'letter_grade': None, 'type': 'boulder', 'user_id': 2, 'workout': 2},
                 {'grade': 12, 'id': 6, 'letter_grade': 'a', 'type': 'route', 'user_id': 2, 'workout': 2},
                 {'grade': 11, 'id': 7, 'letter_grade': 'a', 'type': 'route', 'user_id': 2, 'workout': 2}
-            ]
+            ],
+            'notes': "This is the new note."
         }
     )
     assert success_response.status_code == 200
    
     assert b"climbs" in success_response.data
     assert success_response.json['climbs'][2]['grade'] == 14
+    assert b"new note" in success_response.data
 
 def test_workout_update_user_cannot_update_anothers_workout(test_client, init_database):
     auth_response = test_util.get_auth_response(test_client, snoopy_username, snoopy_password)

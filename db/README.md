@@ -35,4 +35,6 @@ If you need to change the database schema, please create a sql file in the migra
 
 ```bash
 sqlite3 climbing_stats.db
+> pragma table_info(table_name) #show columns of table
+> select * from table_name limit 10;
 ```
