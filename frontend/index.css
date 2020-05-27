@@ -17,6 +17,16 @@ html {
     padding: 4rem;
 }
 
+.d3-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.histogram {
+    margin: none;
+}
+
 .climbing-orange {
     color: #f26202 
 }
