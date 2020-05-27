@@ -12,7 +12,7 @@ export default ({ setShowSignup }) => {
                 <Container fluid >
                     <div className="splash-content">
                         <MainHeader>
-                            Reach your climbing goals with Pinnacle
+                            Reach new heights with Pinnacle.
                         </MainHeader>
                         <SubHeader>
                                 Simple logging for your gym climbs
