@@ -9,14 +9,17 @@ export default ({routeData, boulderData}) => {
     
     // format routeData and boulderData as k/v pairs in histogram data passed in
 
+
     useEffect(() => {
+        console.log("INSIDE USE EFFECT")
+        d3.selectAll("svg").remove();
         if (routeData && rightContainer.current) {   
             drawRightChart(routeData);  
         }
         if (boulderData && leftContainer.current) {
             drawLeftChart(boulderData);
         }
-    }, [routeData, rightContainer.current])
+    }, [routeData, boulderData])
 
     //replace this object with a regex function that handles various cases and returns appropriate hex
     const barColors = colorHash;
@@ -127,8 +130,8 @@ export default ({routeData, boulderData}) => {
 
     return (
         <div className="d3-container">
-            <div ref={leftContainer}></div>
-            <div ref={rightContainer}></ div>
+            <div className="histogram" ref={leftContainer}></div>
+            <div className="histogram" ref={rightContainer}></ div>
         </div>
         
     )
