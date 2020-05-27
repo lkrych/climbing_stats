@@ -26,7 +26,7 @@ export const Button = styled.button`
 
 export const MainHeader = styled.h1`
     font-size: 6rem;
-    font-weight: normal;
+    font-weight: bold;
     margin-bottom: 0;
     color: #f9cd0e;
 `
